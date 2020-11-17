@@ -3,6 +3,8 @@ import mediapipe as mp
 import pyautogui
 from mediapipe.framework.formats import landmark_pb2
 
+webCamID = 1
+
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 hand_landmarksOutputCount = 1
@@ -29,7 +31,7 @@ myhand_landmarkDic = {}
 # For webcam input:
 hands = mp_hands.Hands(
     min_detection_confidence=0.8, min_tracking_confidence=0.66)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(webCamID)
 while cap.isOpened():
     success, image = cap.read()
     if not success:
