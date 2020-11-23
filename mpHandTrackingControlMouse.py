@@ -11,12 +11,14 @@ mp_hands = mp.solutions.hands
 mouseXmarginFix = 30 #滑鼠x座標調整，會依照手指所在區域對應不同調整辦法
 mouseYmarginFix = 30 #滑鼠y座標調整，會依照手指所在區域對應不同調整辦法
 userMousePositionZoomFactor = 1.06 #除了乘上螢幕解析度外，額外乘以的係數
+lastMouseMoveMillis = 0
 
 # For webcam input:
 hands = mp_hands.Hands(
     min_detection_confidence=0.7, min_tracking_confidence=0.5)
 cap = cv2.VideoCapture(webcam_id, cv2.CAP_DSHOW)
 while cap.isOpened():
+    millis = int(round(time.time() * 1000))
     success, image = cap.read()
     if not success:
         break
@@ -56,12 +58,13 @@ while cap.isOpened():
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
-        pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
-        #if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 15:
-        #    pyautogui.leftClick()
+        if abs(lastMouseMoveMillis - millis) >= 100:
+            pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
+            lastMouseMoveMillis = millis
+        if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 15:
+            pyautogui.leftClick()
 
     cv2.imshow(window_name, image)
-
     if cv2.waitKey(5) & 0xFF == 27:
         print(idx_to_coordinates)
         break
