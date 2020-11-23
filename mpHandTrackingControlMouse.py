@@ -43,11 +43,12 @@ while cap.isOpened():
             if landmark_px:
                 idx_to_coordinates[idx] = landmark_px
                 if idx == 8:
+                    xpos, ypos = idx_to_coordinates[8]
+                    # if idx_to_coordinates[8] is not None then store them in x,y variables
                     print(idx, ":", idx_to_coordinates[idx])
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
-        xpos, ypos = idx_to_coordinates[8]
         pyautogui.moveTo(xpos / window_w * desktop_width, ypos / window_h * desktop_height)
         # x = xpos / window_w * desktop_width
         # y = ypos / window_h * desktop_height
