@@ -53,8 +53,6 @@ while cap.isOpened():
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
         pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
-        # x = xpos / window_w * desktop_width
-        # y = ypos / window_h * desktop_height
         if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 15:
             pyautogui.leftClick()
 
