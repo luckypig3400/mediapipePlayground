@@ -42,10 +42,13 @@ while cap.isOpened():
                                                                                              image_cols, image_rows)
             if landmark_px:
                 idx_to_coordinates[idx] = landmark_px
+                if idx == 4: # thumb TIP x,y position
+                    thumbTIP_x, thumbTIP_y = idx_to_coordinates[4]
+                    print(idx, ":(thumb TIP)", idx_to_coordinates[idx])
                 if idx == 8: # index Finger TIP x,y position
                     indexFingerTIP_x, indexFingerTIP_y = idx_to_coordinates[8]
                     # if idx_to_coordinates[8] is not None then store them in x,y variables
-                    print(idx, ":", idx_to_coordinates[idx])
+                    print(idx, ":(index TIP)", idx_to_coordinates[idx])
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
