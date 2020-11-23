@@ -11,7 +11,7 @@ mp_hands = mp.solutions.hands
 # For webcam input:
 hands = mp_hands.Hands(
     min_detection_confidence=0.7, min_tracking_confidence=0.5)
-cap = cv2.VideoCapture(webcam_id)
+cap = cv2.VideoCapture(webcam_id, cv2.CAP_DSHOW)
 while cap.isOpened():
     success, image = cap.read()
     if not success:
@@ -51,8 +51,11 @@ while cap.isOpened():
         # x = xpos / window_w * desktop_width
         # y = ypos / window_h * desktop_height
 
-    cv2.imshow('MediaPipe Hands', image)
+    cv2.imshow(window_name, image)
+
     if cv2.waitKey(5) & 0xFF == 27:
+        print(idx_to_coordinates)
         break
+
 hands.close()
 cap.release()
