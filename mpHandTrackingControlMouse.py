@@ -12,6 +12,7 @@ mouseXmarginFix = 30  # 滑鼠x座標調整，會依照手指所在區域對應�
 mouseYmarginFix = 30  # 滑鼠y座標調整，會依照手指所在區域對應不同調整辦法
 userMousePositionZoomFactor = 1.06  # 除了乘上螢幕解析度外，額外乘以的係數
 lastMouseMoveMillis = 0
+lastMouseClickMillis = 0
 
 # For webcam input:
 hands = mp_hands.Hands(
@@ -58,11 +59,12 @@ while cap.isOpened():
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
-        if abs(lastMouseMoveMillis - millis) >= 100:
+        if abs(lastMouseMoveMillis - millis) >= 100: # 每100毫秒移動一次滑鼠
             pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
             lastMouseMoveMillis = millis
         if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 15:
-            pyautogui.leftClick()
+            if abs(lastMouseClickMillis - millis) >= 500: # 每500毫秒可以點擊滑鼠左鍵
+                pyautogui.leftClick()
 
     cv2.imshow(window_name, image)
     if cv2.waitKey(5) & 0xFF == 27:
