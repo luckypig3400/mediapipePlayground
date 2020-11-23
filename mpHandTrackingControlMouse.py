@@ -8,9 +8,9 @@ window_name = 'Hand Tracking Control Mouse Example'
 desktop_width, desktop_height = pyautogui.size()
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
-mouseXmarginFix = 30 #滑鼠x座標調整，會依照手指所在區域對應不同調整辦法
-mouseYmarginFix = 30 #滑鼠y座標調整，會依照手指所在區域對應不同調整辦法
-userMousePositionZoomFactor = 1.06 #除了乘上螢幕解析度外，額外乘以的係數
+mouseXmarginFix = 30  # 滑鼠x座標調整，會依照手指所在區域對應不同調整辦法
+mouseYmarginFix = 30  # 滑鼠y座標調整，會依照手指所在區域對應不同調整辦法
+userMousePositionZoomFactor = 1.06  # 除了乘上螢幕解析度外，額外乘以的係數
 lastMouseMoveMillis = 0
 
 # For webcam input:
@@ -48,13 +48,13 @@ while cap.isOpened():
                                                                                              image_cols, image_rows)
             if landmark_px:
                 idx_to_coordinates[idx] = landmark_px
-                if idx == 4: # thumb TIP x,y position
+                if idx == 4:  # thumb TIP x,y position
                     thumbTIP_x, thumbTIP_y = idx_to_coordinates[4]
-                    print(idx, ":(thumb TIP)", idx_to_coordinates[idx])
-                if idx == 8: # index Finger TIP x,y position
+                    # print(idx, ":(thumb TIP)", idx_to_coordinates[idx])
+                if idx == 8:  # index Finger TIP x,y position
                     indexFingerTIP_x, indexFingerTIP_y = idx_to_coordinates[8]
                     # if idx_to_coordinates[8] is not None then store them in x,y variables
-                    print(idx, ":(index TIP)", idx_to_coordinates[idx])
+                    # print(idx, ":(index TIP)", idx_to_coordinates[idx])
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
