@@ -14,6 +14,8 @@ userMousePositionZoomFactor = 1.06  # 除了乘上螢幕解析度外，額外乘
 lastMouseMoveMillis = 0
 lastMouseClickMillis = 0
 
+pyautogui.PAUSE = 0 # 讓pyautogui在使用移動函式後不要暫停系統
+
 # For webcam input:
 hands = mp_hands.Hands(
     min_detection_confidence=0.7, min_tracking_confidence=0.5)
