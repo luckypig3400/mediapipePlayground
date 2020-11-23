@@ -42,6 +42,8 @@ while cap.isOpened():
                                                                                              image_cols, image_rows)
             if landmark_px:
                 idx_to_coordinates[idx] = landmark_px
+                if idx == 8:
+                    print(idx, ":", idx_to_coordinates[idx])
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
