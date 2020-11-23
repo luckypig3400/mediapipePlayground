@@ -1,12 +1,17 @@
 import cv2
 import mediapipe as mp
+import pyautogui
+
+webcam_id = 1
+window_name = 'Hand Tracking Control Mouse Example'
+desktop_width, desktop_height = pyautogui.size()
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
 # For webcam input:
 hands = mp_hands.Hands(
     min_detection_confidence=0.7, min_tracking_confidence=0.5)
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(webcam_id)
 while cap.isOpened():
   success, image = cap.read()
   if not success:
