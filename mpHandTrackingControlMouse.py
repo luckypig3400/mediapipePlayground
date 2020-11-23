@@ -33,6 +33,24 @@ while cap.isOpened():
             mp_drawing.draw_landmarks(
                 image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
+        image_rows, image_cols, _ = image.shape
+        idx_to_coordinates = {}
+        for idx, landmark in enumerate(hand_landmarks.landmark):
+            if landmark.visibility < 0 or landmark.presence < 0:
+                continue
+            landmark_px = mp.python.solutions.drawing_utils._normalized_to_pixel_coordinates(landmark.x, landmark.y,
+                                                                                             image_cols, image_rows)
+            if landmark_px:
+                idx_to_coordinates[idx] = landmark_px
+
+        # Screen Monitor
+        window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
+        # xpos, ypos = kp_orig[4,:2]
+        xpos, ypos = idx_to_coordinates[8]
+        pyautogui.moveTo(window_x + xpos, window_y + ypos)
+        # x = xpos / window_w * desktop_width
+        # y = ypos / window_h * desktop_height
+
     cv2.imshow('MediaPipe Hands', image)
     if cv2.waitKey(5) & 0xFF == 27:
         break
