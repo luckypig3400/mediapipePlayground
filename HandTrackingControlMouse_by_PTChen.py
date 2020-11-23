@@ -1,17 +1,14 @@
 import cv2
 import mediapipe as mp
-
-# import numpy as np
 import pyautogui
 
 webcam_id = 1
 window_name = 'Hand Tracking Control Mouse Example'
-
 desktop_width, desktop_height = pyautogui.size()
-
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
+# For webcam input:
 hands = mp_hands.Hands(
     min_detection_confidence=0.7, min_tracking_confidence=0.5)
 cap = cv2.VideoCapture(webcam_id, cv2.CAP_DSHOW)
@@ -42,14 +39,14 @@ while cap.isOpened():
             if landmark.visibility < 0 or landmark.presence < 0:
                 continue
             landmark_px = mp.python.solutions.drawing_utils._normalized_to_pixel_coordinates(landmark.x, landmark.y,
-                                                           image_cols, image_rows)
+                                                                                             image_cols, image_rows)
             if landmark_px:
                 idx_to_coordinates[idx] = landmark_px
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
         # xpos, ypos = kp_orig[4,:2]
-        xpos ,ypos = idx_to_coordinates[8]
+        xpos, ypos = idx_to_coordinates[8]
         pyautogui.moveTo(window_x + xpos, window_y + ypos)
         # x = xpos / window_w * desktop_width
         # y = ypos / window_h * desktop_height
