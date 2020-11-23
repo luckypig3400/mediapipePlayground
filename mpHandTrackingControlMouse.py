@@ -1,12 +1,16 @@
 import cv2
 import mediapipe as mp
 import pyautogui
+import time
 
 webcam_id = 1
 window_name = 'Hand Tracking Control Mouse Example'
 desktop_width, desktop_height = pyautogui.size()
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
+mouseXmarginFix = 30 #滑鼠x座標調整，會依照手指所在區域對應不同調整辦法
+mouseYmarginFix = 30 #滑鼠y座標調整，會依照手指所在區域對應不同調整辦法
+userMousePositionZoomFactor = 1.06 #除了乘上螢幕解析度外，額外乘以的係數
 
 # For webcam input:
 hands = mp_hands.Hands(
@@ -53,8 +57,8 @@ while cap.isOpened():
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
         pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
-        if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 15:
-            pyautogui.leftClick()
+        #if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 15:
+        #    pyautogui.leftClick()
 
     cv2.imshow(window_name, image)
 
