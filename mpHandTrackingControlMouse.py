@@ -47,7 +47,6 @@ while cap.isOpened():
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
-        # xpos, ypos = kp_orig[4,:2]
         xpos, ypos = idx_to_coordinates[8]
         pyautogui.moveTo(xpos / window_w * desktop_width, ypos / window_h * desktop_height)
         # x = xpos / window_w * desktop_width
