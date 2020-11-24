@@ -64,6 +64,7 @@ while cap.isOpened():
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
+        # TODO divide webcam area to four grid, each grid will use different Mathematical formula to calculate mouse position
         if abs(lastMouseMoveMillis - millis) >= 30:  # 每30毫秒移動一次滑鼠
             pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
             lastMouseMoveMillis = millis
