@@ -75,3 +75,44 @@ while cap.isOpened():
 
 hands.close()
 cap.release()
+
+#        8   12  16  20
+#        |   |   |   |
+#        7   11  15  19
+#    4   |   |   |   |
+#    |   6   10  14  18
+#    3   |   |   |   |
+#    |   5---9---13--17
+#    2    \         /
+#     \    \       /
+#      1    \     /
+#       \    \   /
+#        ------0-
+
+# INDEX_FINGER_DIP = <HandLandmark.INDEX_FINGER_DIP: 7>
+# INDEX_FINGER_MCP = <HandLandmark.INDEX_FINGER_MCP: 5>
+# INDEX_FINGER_PIP = <HandLandmark.INDEX_FINGER_PIP: 6>
+# INDEX_FINGER_TIP = <HandLandmark.INDEX_FINGER_TIP: 8>
+#
+# MIDDLE_FINGER_DIP = <HandLandmark.MIDDLE_FINGER_DIP: 11>
+# MIDDLE_FINGER_MCP = <HandLandmark.MIDDLE_FINGER_MCP: 9>
+# MIDDLE_FINGER_PIP = <HandLandmark.MIDDLE_FINGER_PIP: 10>
+# MIDDLE_FINGER_TIP = <HandLandmark.MIDDLE_FINGER_TIP: 12>
+#
+# PINKY_DIP = <HandLandmark.PINKY_DIP: 19>
+# PINKY_MCP = <HandLandmark.PINKY_MCP: 17>
+# PINKY_PIP = <HandLandmark.PINKY_PIP: 18>
+# PINKY_TIP = <HandLandmark.PINKY_TIP: 20>
+#
+# RING_FINGER_DIP = <HandLandmark.RING_FINGER_DIP: 15>
+# RING_FINGER_MCP = <HandLandmark.RING_FINGER_MCP: 13>
+# RING_FINGER_PIP = <HandLandmark.RING_FINGER_PIP: 14>
+# RING_FINGER_TIP = <HandLandmark.RING_FINGER_TIP: 16>
+#
+# THUMB_CMC = <HandLandmark.THUMB_CMC: 1>
+# THUMB_IP = <HandLandmark.THUMB_IP: 3>
+# THUMB_MCP = <HandLandmark.THUMB_MCP: 2>
+# THUMB_TIP = <HandLandmark.THUMB_TIP: 4>
+#
+# WRIST = <HandLandmark.WRIST: 0>
+
