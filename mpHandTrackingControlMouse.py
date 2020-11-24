@@ -67,6 +67,7 @@ while cap.isOpened():
         if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 15:
             if abs(lastMouseClickMillis - millis) >= 500: # 每500毫秒可以點擊滑鼠左鍵
                 pyautogui.leftClick()
+                lastMouseClickMillis = millis
 
     cv2.imshow(window_name, image)
     if cv2.waitKey(5) & 0xFF == 27:
