@@ -68,11 +68,11 @@ while cap.isOpened():
         if abs(lastMouseMoveMillis - millis) >= 30:  # 每30毫秒移動一次滑鼠
             pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
             lastMouseMoveMillis = millis
-        if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 15:
+        if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 9:
             if abs(lastMouseLeftClickMillis - millis) >= 900:  # 每900毫秒可以點擊滑鼠左鍵
                 pyautogui.leftClick()
                 lastMouseLeftClickMillis = millis
-        if abs(thumbTIP_x - middleFingerTIP_x) <= 6 and abs(thumbTIP_y - middleFingerTIP_y) <= 9:
+        if abs(thumbTIP_x - middleFingerTIP_x) <= 6 and abs(thumbTIP_y - middleFingerTIP_y) <= 6:
             if abs(lastMouseRightClickMillis - millis) >= 900:  # 每900毫秒可以點擊滑鼠右鍵
                 pyautogui.rightClick()
                 lastMouseRightClickMillis = millis
