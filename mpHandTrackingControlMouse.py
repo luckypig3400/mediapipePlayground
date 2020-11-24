@@ -58,10 +58,12 @@ while cap.isOpened():
                     indexFingerTIP_x, indexFingerTIP_y = idx_to_coordinates[8]
                     # if idx_to_coordinates[8] is not None then store them in x,y variables
                     # print(idx, ":(index TIP)", idx_to_coordinates[idx])
+                if idx == 12:  # middle Finger TIP x,y position
+                    middleFingerTIP_x, middleFingerTIP_y = idx_to_coordinates[12]
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
-        if abs(lastMouseMoveMillis - millis) >= 100: # 每100毫秒移動一次滑鼠
+        if abs(lastMouseMoveMillis - millis) >= 30: # 每30毫秒移動一次滑鼠
             pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
             lastMouseMoveMillis = millis
         if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 15:
