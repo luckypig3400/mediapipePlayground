@@ -80,7 +80,17 @@ while cap.isOpened():
             landmark_px = normalized_2_pixel_coordinates(landmark.x, landmark.y, landmark.z, image_cols, image_rows)
             if landmark_px:
                 idx_to_coordinates.append(landmark_px)
+        # print("Before np.array Method:", idx_to_coordinates)
         idx_to_coordinates = np.array(idx_to_coordinates)
+        # print("After np.array Method:", idx_to_coordinates)
+
+        each_joint_xyz_point = []
+        jointNumber = 0
+        for element in idx_to_coordinates:  # print index finger x,y,z coordinates
+            each_joint_xyz_point.append(jointNumber)
+            each_joint_xyz_point.append(element)
+            jointNumber += 1
+        print(each_joint_xyz_point)
 
     cv2.imshow(window_name, image)
 
