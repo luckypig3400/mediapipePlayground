@@ -38,10 +38,8 @@ mp_hands = mp.solutions.hands
 hands = mp_hands.Hands(
     min_detection_confidence=0.7, min_tracking_confidence=0.5)
 
-
 MouseL_Click = False
 MouseR_Click = False
-
 
 cap = cv2.VideoCapture(webcam_id, cv2.CAP_DSHOW)
 
@@ -83,49 +81,6 @@ while cap.isOpened():
             if landmark_px:
                 idx_to_coordinates.append(landmark_px)
         idx_to_coordinates = np.array(idx_to_coordinates)
-
-        # Screen Monitor
-        window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
-        # xpos, ypos = np.mean(idx_to_coordinates[:, :2], axis=0)
-        not_None_px = idx_to_coordinates[idx_to_coordinates != None].reshape(-1,3)
-        xpos, ypos = not_None_px[:, :2].mean(axis=0)
-        # pyautogui.moveTo(window_x + xpos, window_y + ypos)
-        # x = xpos / window_w * desktop_width
-        # y = ypos / window_h * desktop_height
-        wb, hb = window_w / ratioxy, window_h / ratioxy
-        # x = np.min([np.max([1, xpos - wb]), window_w * (ratioxy-1)/ratioxy ])
-        x = (xpos - wb) / ((ratioxy - 2)/ratioxy * window_w) * desktop_width
-        # y = np.min([np.max([1, ypos - hb]), window_h * (ratioxy - 1) / ratioxy])
-        y = (ypos - hb) / ((ratioxy - 2) / ratioxy * window_h) * desktop_height
-        x = np.min([np.max([1, x]), desktop_width-1])
-        y = np.min([np.max([1, y]), desktop_height-1])
-        pyautogui.moveTo(x, y)
-
-        # Mouse Control
-        # Click_Threshold = np.linalg.norm(idx_to_coordinates[4, :] - idx_to_coordinates[2, :])
-        Click_Threshold = 50
-        if np.all(idx_to_coordinates[8]) and np.all(idx_to_coordinates[4]):
-            MouseL = np.linalg.norm(idx_to_coordinates[8] - idx_to_coordinates[4])
-        if np.all(idx_to_coordinates[12]) and np.all(idx_to_coordinates[4]):
-            MouseR = np.linalg.norm(idx_to_coordinates[12] - idx_to_coordinates[4])
-
-        if MouseL <= Click_Threshold and MouseL_Click is False:
-            pyautogui.mouseDown(button='left')
-            MouseL_Click = True
-        elif MouseL > Click_Threshold and MouseL_Click is True:
-            pyautogui.mouseUp(button='left')
-            MouseL_Click = False
-        else:
-            pass
-
-        # if MouseR <= Click_Threshold and MouseR_Click is False:
-        #     pyautogui.mouseDown(button='right')
-        #     MouseR_Click = True
-        # elif MouseR > Click_Threshold and MouseR_Click is True:
-        #     pyautogui.mouseUp(button='right')
-        #     MouseR_Click = False
-        # else:
-        #     pass
 
     cv2.imshow(window_name, image)
 
