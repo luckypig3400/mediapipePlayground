@@ -11,7 +11,6 @@ desktop_width, desktop_height = pyautogui.size()
 pyautogui.PAUSE = 0
 ratioxy = 5
 
-
 def normalized_2_pixel_coordinates(
         normalized_x: float, normalized_y: float, normalized_z: float, image_width: int,
         image_height: int) -> [int, int, int]:
@@ -110,3 +109,30 @@ cap.release()
 #      1    \     /
 #       \    \   /
 #        ------0-
+
+# INDEX_FINGER_TIP = <HandLandmark.INDEX_FINGER_TIP: 8>
+# INDEX_FINGER_DIP = <HandLandmark.INDEX_FINGER_DIP: 7>
+# INDEX_FINGER_PIP = <HandLandmark.INDEX_FINGER_PIP: 6>
+# INDEX_FINGER_MCP = <HandLandmark.INDEX_FINGER_MCP: 5>
+
+# MIDDLE_FINGER_TIP = <HandLandmark.MIDDLE_FINGER_TIP: 12>
+# MIDDLE_FINGER_DIP = <HandLandmark.MIDDLE_FINGER_DIP: 11>
+# MIDDLE_FINGER_PIP = <HandLandmark.MIDDLE_FINGER_PIP: 10>
+# MIDDLE_FINGER_MCP = <HandLandmark.MIDDLE_FINGER_MCP: 9>
+
+# PINKY_TIP = <HandLandmark.PINKY_TIP: 20>
+# PINKY_DIP = <HandLandmark.PINKY_DIP: 19>
+# PINKY_PIP = <HandLandmark.PINKY_PIP: 18>
+# PINKY_MCP = <HandLandmark.PINKY_MCP: 17>
+
+# RING_FINGER_TIP = <HandLandmark.RING_FINGER_TIP: 16>
+# RING_FINGER_DIP = <HandLandmark.RING_FINGER_DIP: 15>
+# RING_FINGER_PIP = <HandLandmark.RING_FINGER_PIP: 14>
+# RING_FINGER_MCP = <HandLandmark.RING_FINGER_MCP: 13>
+
+# THUMB_CMC = <HandLandmark.THUMB_CMC: 1>
+# THUMB_IP = <HandLandmark.THUMB_IP: 3>
+# THUMB_MCP = <HandLandmark.THUMB_MCP: 2>
+# THUMB_TIP = <HandLandmark.THUMB_TIP: 4>
+#
+# WRIST = <HandLandmark.WRIST: 0>
