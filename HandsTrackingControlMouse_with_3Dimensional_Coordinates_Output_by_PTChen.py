@@ -4,7 +4,7 @@ import mediapipe as mp
 import numpy as np
 import pyautogui
 
-webcam_id = 0
+webcam_id = 1
 window_name = 'Hand Tracking'
 
 desktop_width, desktop_height = pyautogui.size()
