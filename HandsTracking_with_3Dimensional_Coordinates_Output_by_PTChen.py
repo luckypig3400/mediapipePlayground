@@ -84,13 +84,11 @@ while cap.isOpened():
         idx_to_coordinates = np.array(idx_to_coordinates)
         # print("After np.array Method:", idx_to_coordinates)
 
-        each_joint_xyz_point = []
-        jointNumber = 0
-        for element in idx_to_coordinates:  # print index finger x,y,z coordinates
-            each_joint_xyz_point.append(jointNumber)
-            each_joint_xyz_point.append(element)
-            jointNumber += 1
-        print(each_joint_xyz_point)
+        index_joints_xyz_point = []
+        for i in range(5, 9):  # print index finger x,y,z coordinates
+            if i ==5: index_joints_xyz_point.append("")
+            index_joints_xyz_point.append(idx_to_coordinates[i])
+        print(index_joints_xyz_point)
 
     cv2.imshow(window_name, image)
 
