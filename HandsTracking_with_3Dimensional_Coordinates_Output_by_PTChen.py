@@ -30,6 +30,25 @@ def normalized_2_pixel_coordinates(
     return x_px, y_px
 
 
+def normalized_3_pixel_coordinates(
+        normalized_x: float, normalized_y: float, normalized_z: float, image_width: int,
+        image_height: int) -> [float, float, float]:
+    """Converts normalized value pair to pixel coordinates."""
+
+    # Checks if the float value is between 0 and 1.
+    def is_valid_normalized_value(value: float) -> bool:
+        return (value > 0 or np.isclose(0, value)) and (value < 1 or np.isclose(1, value))
+
+    if not (is_valid_normalized_value(normalized_x) and
+            is_valid_normalized_value(normalized_y)):
+        # TODO: Draw coordinates even if it's outside of the image bounds.
+        return [None, None, None]
+    x_px = min(normalized_x * image_width, image_width - 1)
+    y_px = min(normalized_y * image_height, image_height - 1)
+    z_px = normalized_z
+    return x_px, y_px, z_px
+
+
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 
