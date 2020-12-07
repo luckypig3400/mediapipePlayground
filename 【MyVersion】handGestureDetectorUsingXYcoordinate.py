@@ -42,6 +42,7 @@ cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREE
 # cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
 cv2.resizeWindow(window_name, cam_width, cam_height)
 cv2.moveWindow(window_name, 300, 300)
+fingerBendStatus = [0, 0, 0, 0, 0]  # 0~4 : thumb~pinky
 
 while cap.isOpened():
     success, image = cap.read()
@@ -90,25 +91,44 @@ while cap.isOpened():
         # below is to judge if finger has bent
         # TODO:focus on thumb bend accuracy
         try:
-
             if idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] < \
                     idx_to_coordinates[4][0] < idx_to_coordinates[20][0]:  # right hand
+                fingerBendStatus[0] = 1
                 cv2.putText(image, "thumb bent(right hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             elif idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] > \
                     idx_to_coordinates[4][0] > idx_to_coordinates[20][0]:  # left hand
+                fingerBendStatus[0] = 1
                 cv2.putText(image, "thumb bent(left hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+            else:
+                fingerBendStatus[0] = 0
+
             if idx_to_coordinates[8][1] > idx_to_coordinates[5][1] or idx_to_coordinates[7][1] > \
                     idx_to_coordinates[5][1]:
+                fingerBendStatus[1] = 1
                 cv2.putText(image, "index finger bent", (30, 60), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+            else:
+                fingerBendStatus[1] = 0
+
             if idx_to_coordinates[12][1] > idx_to_coordinates[9][1] or idx_to_coordinates[11][1] > \
                     idx_to_coordinates[9][1]:
+                fingerBendStatus[2] = 1
                 cv2.putText(image, "middle finger bent", (30, 90), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+            else:
+                fingerBendStatus[2] = 0
+
             if idx_to_coordinates[16][1] > idx_to_coordinates[13][1] or idx_to_coordinates[15][1] > \
                     idx_to_coordinates[13][1]:
+                fingerBendStatus[3] = 1
                 cv2.putText(image, "ring finger bent", (30, 120), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+            else:
+                fingerBendStatus[3] = 0
+
             if idx_to_coordinates[20][1] > idx_to_coordinates[17][1] or idx_to_coordinates[19][1] > \
                     idx_to_coordinates[17][1]:
+                fingerBendStatus[4] = 1
                 cv2.putText(image, "pinky bent", (30, 150), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+            else:
+                fingerBendStatus[4] = 0
         except:
             print("Oops found Missing Joints")
         # above is to judge if finger has bent
