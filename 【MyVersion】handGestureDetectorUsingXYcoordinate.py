@@ -1,9 +1,9 @@
 import cv2
 import mediapipe as mp
 import numpy as np
+import pyautogui
 
-webcam_id = 1
-window_name = 'Hand Gesture Detector'
+desktop_width, desktop_height = pyautogui.size()
 
 def normalized_3_pixel_coordinates(
         normalized_x: float, normalized_y: float, normalized_z: float, image_width: int,
@@ -26,6 +26,8 @@ def normalized_3_pixel_coordinates(
 
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
+webcam_id = 1
+window_name = 'Hand Gesture Detector'
 
 hands = mp_hands.Hands(
     min_detection_confidence=0.7, min_tracking_confidence=0.5)
