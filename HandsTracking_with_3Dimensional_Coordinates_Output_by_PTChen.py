@@ -13,23 +13,21 @@ ratioxy = 5
 
 
 def normalized_2_pixel_coordinates(
-        normalized_x: float, normalized_y: float, normalized_z: float, image_width: int,
-        image_height: int) -> [int, int, int]:
+        normalized_x: float, normalized_y: float, image_width: int,
+        image_height: int) -> [int, int]:
     """Converts normalized value pair to pixel coordinates."""
 
     # Checks if the float value is between 0 and 1.
     def is_valid_normalized_value(value: float) -> bool:
-        return (value > 0 or np.isclose(0, value)) and (value < 1 or
-                                                        np.isclose(1, value))
+        return (value > 0 or np.isclose(0, value)) and (value < 1 or np.isclose(1, value))
 
     if not (is_valid_normalized_value(normalized_x) and
             is_valid_normalized_value(normalized_y)):
         # TODO: Draw coordinates even if it's outside of the image bounds.
-        return [None, None, None]
+        return [None, None]
     x_px = min(np.floor(normalized_x * image_width), image_width - 1)
     y_px = min(np.floor(normalized_y * image_height), image_height - 1)
-    z_px = np.floor(normalized_y * image_height)
-    return x_px, y_px, z_px
+    return x_px, y_px
 
 
 mp_drawing = mp.solutions.drawing_utils
@@ -77,7 +75,7 @@ while cap.isOpened():
         for idx, landmark in enumerate(results.multi_hand_landmarks[0].landmark):
             if landmark.visibility < 0 or landmark.presence < 0:
                 continue
-            landmark_px = normalized_2_pixel_coordinates(landmark.x, landmark.y, landmark.z, image_cols, image_rows)
+            landmark_px = normalized_2_pixel_coordinates(landmark.x, landmark.y, image_cols, image_rows)
             if landmark_px:
                 idx_to_coordinates.append(landmark_px)
         # print("Before np.array Method:", idx_to_coordinates)
@@ -86,16 +84,15 @@ while cap.isOpened():
 
         for i in range(5, 9):  # print index finger joints(5~9) x,y,z coordinates
             try:
-                singleJointInfo = "x:" + str(idx_to_coordinates[i][0]) + " y:" + str(
-                    idx_to_coordinates[i][1]) + " z:" + str(idx_to_coordinates[i][2])
+                singleJointInfo = "x:" + str(idx_to_coordinates[i][0]) + " y:" + str(idx_to_coordinates[i][1])
                 textLocation = (int(idx_to_coordinates[i][0]), int(idx_to_coordinates[i][1]))
 
                 cv2.putText(image, singleJointInfo, textLocation, cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             except:
                 print("Oops found Missing Joints")
 
-        print("idx_to_coordinates info:dtype:" + str(idx_to_coordinates.dtype) + "\tshape:" + str(
-            idx_to_coordinates.shape) + "\tsize:" + str(idx_to_coordinates.size))
+        # print("idx_to_coordinates info:dtype:" + str(idx_to_coordinates.dtype) + "\tshape:" + str(
+        #     idx_to_coordinates.shape) + "\tsize:" + str(idx_to_coordinates.size))
 
     cv2.imshow(window_name, image)
 
