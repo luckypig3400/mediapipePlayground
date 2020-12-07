@@ -75,10 +75,10 @@ while cap.isOpened():
         idx_to_coordinates = np.array(idx_to_coordinates)
         # print("After np.array Method:", idx_to_coordinates)
 
-        for i in range(5, 9):  # print index finger joints(5~9) x,y,z coordinates
+        for i in range(1, 21):  # print all finger's joints(1~20) x,y coordinates
             try:
                 singleJointInfo = "x:" + str(int(idx_to_coordinates[i][0])) + " y:" + str(int(
-                    idx_to_coordinates[i][1])) + " z:" + str(idx_to_coordinates[i][2])
+                    idx_to_coordinates[i][1]))
                 textLocation = (int(idx_to_coordinates[i][0]), int(idx_to_coordinates[i][1]))
 
                 cv2.putText(image, singleJointInfo, textLocation, cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)

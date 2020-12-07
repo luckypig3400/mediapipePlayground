@@ -101,7 +101,7 @@ while cap.isOpened():
         idx_to_coordinates = np.array(idx_to_coordinates)
         # print("After np.array Method:", idx_to_coordinates)
 
-        for i in range(5, 9):  # print index finger joints(5~9) x,y,z coordinates
+        for i in range(5, 9):  # print index finger joints(5~8) x,y,z coordinates
             try:
                 singleJointInfo = "x:" + str(int(idx_to_coordinates[i][0])) + " y:" + str(int(
                     idx_to_coordinates[i][1])) + " z:" + str(idx_to_coordinates[i][2])
