@@ -94,7 +94,7 @@ while cap.isOpened():
         for idx, landmark in enumerate(results.multi_hand_landmarks[0].landmark):
             if landmark.visibility < 0 or landmark.presence < 0:
                 continue
-            landmark_px = normalized_2_pixel_coordinates(landmark.x, landmark.y, image_cols, image_rows)
+            landmark_px = normalized_3_pixel_coordinates(landmark.x, landmark.y, landmark.z, image_cols, image_rows)
             if landmark_px:
                 idx_to_coordinates.append(landmark_px)
         # print("Before np.array Method:", idx_to_coordinates)
@@ -103,7 +103,8 @@ while cap.isOpened():
 
         for i in range(5, 9):  # print index finger joints(5~9) x,y,z coordinates
             try:
-                singleJointInfo = "x:" + str(idx_to_coordinates[i][0]) + " y:" + str(idx_to_coordinates[i][1])
+                singleJointInfo = "x:" + str(idx_to_coordinates[i][0]) + " y:" + str(
+                    idx_to_coordinates[i][1]) + " z:" + str(idx_to_coordinates[i][2])
                 textLocation = (int(idx_to_coordinates[i][0]), int(idx_to_coordinates[i][1]))
 
                 cv2.putText(image, singleJointInfo, textLocation, cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
