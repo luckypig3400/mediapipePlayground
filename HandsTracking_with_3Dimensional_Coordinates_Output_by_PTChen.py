@@ -108,6 +108,10 @@ while cap.isOpened():
                 textLocation = (int(idx_to_coordinates[i][0]), int(idx_to_coordinates[i][1]))
 
                 cv2.putText(image, singleJointInfo, textLocation, cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+
+                if idx_to_coordinates[7][1] > idx_to_coordinates[5][1] or idx_to_coordinates[8][1] > \
+                        idx_to_coordinates[5][1]:
+                    cv2.putText(image, "index finger bent", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             except:
                 print("Oops found Missing Joints")
 
