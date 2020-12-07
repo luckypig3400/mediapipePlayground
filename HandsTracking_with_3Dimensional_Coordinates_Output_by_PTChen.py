@@ -11,6 +11,7 @@ desktop_width, desktop_height = pyautogui.size()
 pyautogui.PAUSE = 0
 ratioxy = 5
 
+
 def normalized_2_pixel_coordinates(
         normalized_x: float, normalized_y: float, normalized_z: float, image_width: int,
         image_height: int) -> [int, int, int]:
@@ -83,12 +84,11 @@ while cap.isOpened():
         idx_to_coordinates = np.array(idx_to_coordinates)
         # print("After np.array Method:", idx_to_coordinates)
 
-        index_joints_xyz_point = []
-        for i in range(5, 9):  # print index finger x,y,z coordinates
-            if i ==5: index_joints_xyz_point.append("")
-            index_joints_xyz_point.append(idx_to_coordinates[i])
-            cv2.putText(image, str(idx_to_coordinates[i]), (100, 100), cv2.FONT_ITALIC, 1, (255, 255, 255), 2)
-        print(index_joints_xyz_point)
+        for i in range(5, 9):  # print index finger joints(5~9) x,y,z coordinates
+            cv2.putText(image, "x:" + str(idx_to_coordinates[i][0]),
+                        (int(idx_to_coordinates[i][0]), int(idx_to_coordinates[i][1])), cv2.FONT_HERSHEY_COMPLEX, 1,
+                        (255, 255, 255), 2)
+        print(idx_to_coordinates.dtype)
 
     cv2.imshow(window_name, image)
 
