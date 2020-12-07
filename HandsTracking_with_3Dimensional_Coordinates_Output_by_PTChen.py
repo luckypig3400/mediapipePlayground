@@ -45,7 +45,7 @@ def normalized_3_pixel_coordinates(
         return [None, None, None]
     x_px = min(normalized_x * image_width, image_width - 1)
     y_px = min(normalized_y * image_height, image_height - 1)
-    z_px = normalized_z
+    z_px = normalized_z * 1000  # 100cm = 1000mm
     return x_px, y_px, z_px
 
 
@@ -103,8 +103,8 @@ while cap.isOpened():
 
         for i in range(5, 9):  # print index finger joints(5~9) x,y,z coordinates
             try:
-                singleJointInfo = "x:" + str(idx_to_coordinates[i][0]) + " y:" + str(
-                    idx_to_coordinates[i][1]) + " z:" + str(idx_to_coordinates[i][2])
+                singleJointInfo = "x:" + str(int(idx_to_coordinates[i][0])) + " y:" + str(int(
+                    idx_to_coordinates[i][1])) + " z:" + str(idx_to_coordinates[i][2])
                 textLocation = (int(idx_to_coordinates[i][0]), int(idx_to_coordinates[i][1]))
 
                 cv2.putText(image, singleJointInfo, textLocation, cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
