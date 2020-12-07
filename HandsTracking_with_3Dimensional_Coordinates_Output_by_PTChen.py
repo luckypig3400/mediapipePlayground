@@ -85,10 +85,13 @@ while cap.isOpened():
         # print("After np.array Method:", idx_to_coordinates)
 
         for i in range(5, 9):  # print index finger joints(5~9) x,y,z coordinates
-            cv2.putText(image, "x:" + str(idx_to_coordinates[i][0]),
-                        (int(idx_to_coordinates[i][0]), int(idx_to_coordinates[i][1])), cv2.FONT_HERSHEY_COMPLEX, 1,
+            singleJointInfo = "x:" + str(idx_to_coordinates[i][0]) + " y:" + str(
+                idx_to_coordinates[i][1]) + " z:" + str(idx_to_coordinates[i][2])
+            cv2.putText(image, singleJointInfo,
+                        (int(idx_to_coordinates[i][0]), int(idx_to_coordinates[i][1])), cv2.FONT_HERSHEY_COMPLEX, 0.6,
                         (255, 255, 255), 2)
-        print(idx_to_coordinates.dtype)
+        print("idx_to_coordinates info:dtype:" + str(idx_to_coordinates.dtype) + "\tshape:" + str(
+            idx_to_coordinates.shape) + "\tsize:" + str(idx_to_coordinates.size))
 
     cv2.imshow(window_name, image)
 
