@@ -76,7 +76,8 @@ while cap.isOpened():
         idx_to_coordinates = np.array(idx_to_coordinates)
         # print("After np.array Method:", idx_to_coordinates)
 
-        for i in range(1, 21):  # print all finger's joints(1~20) x,y coordinates
+        for i in range(1, 5):  # print thumb joints(1~5) x,y coordinates
+            # TODO:focus on thumb bend accuracy
             try:
                 singleJointInfo = "x:" + str(int(idx_to_coordinates[i][0])) + " y:" + str(int(
                     idx_to_coordinates[i][1]))
