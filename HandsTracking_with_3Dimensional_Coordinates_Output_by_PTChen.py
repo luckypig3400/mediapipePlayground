@@ -48,7 +48,7 @@ cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
 cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
 # cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
 cv2.resizeWindow(window_name, cam_width, cam_height)
-cv2.moveWindow(window_name, 0, 0)
+cv2.moveWindow(window_name, 300, 300)
 
 while cap.isOpened():
     success, image = cap.read()
@@ -87,6 +87,7 @@ while cap.isOpened():
         for i in range(5, 9):  # print index finger x,y,z coordinates
             if i ==5: index_joints_xyz_point.append("")
             index_joints_xyz_point.append(idx_to_coordinates[i])
+            cv2.putText(image, str(idx_to_coordinates[i]), (100, 100), cv2.FONT_ITALIC, 1, (255, 255, 255), 2)
         print(index_joints_xyz_point)
 
     cv2.imshow(window_name, image)
