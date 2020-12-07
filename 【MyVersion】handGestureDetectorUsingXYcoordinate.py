@@ -90,8 +90,13 @@ while cap.isOpened():
         # below is to judge if finger has bent
         # TODO:focus on thumb bend accuracy
         try:
-            if idx_to_coordinates[4][1] > idx_to_coordinates[3][1]:
-                cv2.putText(image, "thumb bent", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+
+            if idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] < \
+                    idx_to_coordinates[4][0] < idx_to_coordinates[20][0]:  # right hand
+                cv2.putText(image, "thumb bent(right hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+            elif idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] > \
+                    idx_to_coordinates[4][0] > idx_to_coordinates[20][0]:  # left hand
+                cv2.putText(image, "thumb bent(left hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             if idx_to_coordinates[8][1] > idx_to_coordinates[5][1] or idx_to_coordinates[7][1] > \
                     idx_to_coordinates[5][1]:
                 cv2.putText(image, "index finger bent", (30, 60), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
