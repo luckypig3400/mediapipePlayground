@@ -5,7 +5,7 @@ import numpy as np
 import pyautogui
 
 webcam_id = 1
-window_name = 'Hand Tracking'
+window_name = 'HandsTracking_with_3Dimensional_Coordinates_Output_by_PTChen'
 
 desktop_width, desktop_height = pyautogui.size()
 pyautogui.PAUSE = 0
