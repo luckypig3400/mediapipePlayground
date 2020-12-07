@@ -5,6 +5,7 @@ import pyautogui
 
 desktop_width, desktop_height = pyautogui.size()
 
+
 def normalized_3_pixel_coordinates(
         normalized_x: float, normalized_y: float, normalized_z: float, image_width: int,
         image_height: int) -> [float, float, float]:
@@ -83,9 +84,20 @@ while cap.isOpened():
 
                 cv2.putText(image, singleJointInfo, textLocation, cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
 
-                if idx_to_coordinates[7][1] > idx_to_coordinates[5][1] or idx_to_coordinates[8][1] > \
+                if idx_to_coordinates[4][1] > idx_to_coordinates[3][1]:
+                    cv2.putText(image, "thumb bent", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                if idx_to_coordinates[8][1] > idx_to_coordinates[5][1] or idx_to_coordinates[7][1] > \
                         idx_to_coordinates[5][1]:
                     cv2.putText(image, "index finger bent", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                if idx_to_coordinates[12][1] > idx_to_coordinates[9][1] or idx_to_coordinates[11][1] > \
+                        idx_to_coordinates[9][1]:
+                    cv2.putText(image, "middle finger bent", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                if idx_to_coordinates[16][1] > idx_to_coordinates[13][1] or idx_to_coordinates[15][1] > \
+                        idx_to_coordinates[13][1]:
+                    cv2.putText(image, "ring finger bent", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                if idx_to_coordinates[20][1] > idx_to_coordinates[17][1] or idx_to_coordinates[19][1] > \
+                        idx_to_coordinates[17][1]:
+                    cv2.putText(image, "pinky bent", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             except:
                 print("Oops found Missing Joints")
 
