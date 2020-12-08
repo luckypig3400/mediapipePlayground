@@ -155,6 +155,12 @@ while cap.isOpened():
             cv2.putText(image, "Eight", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [0, 0, 0, 0, 1]:
             cv2.putText(image, "Nine", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+        elif fingerBendStatus == [1, 1, 0, 0, 0]:
+            cv2.putText(image, "OK", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+        elif fingerBendStatus == [0, 0, 1, 1, 0]:
+            cv2.putText(image, "SpiderMan", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+        elif fingerBendStatus == [1, 0, 1, 1, 0]:
+            cv2.putText(image, "Rock", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         # above is hand gesture judge
 
     cv2.imshow(window_name, image)
