@@ -89,7 +89,7 @@ while cap.isOpened():
                 print("Oops found Missing Joints")
 
         # below is to judge if finger has bent
-        # TODO:focus on thumb bend accuracy
+        # TODO:focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
         try:
             if idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] < \
                     idx_to_coordinates[4][0] < idx_to_coordinates[20][0]:  # right hand
