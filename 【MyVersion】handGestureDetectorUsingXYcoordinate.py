@@ -77,57 +77,45 @@ while cap.isOpened():
         idx_to_coordinates = np.array(idx_to_coordinates)
         # print("After np.array Method:", idx_to_coordinates)
 
-        for i in range(1, 5):  # print thumb joints(1~5) x,y coordinates
-            try:
-                singleJointInfo = "x:" + str(int(idx_to_coordinates[i][0])) + " y:" + str(int(
-                    idx_to_coordinates[i][1]))
-                textLocation = (int(idx_to_coordinates[i][0]), int(idx_to_coordinates[i][1]))
-
-                cv2.putText(image, singleJointInfo, textLocation, cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
-
-            except:
-                print("Oops found Missing Joints")
-
         # below is to judge if finger has bent
         # TODO:focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
         try:
             if idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] < \
                     idx_to_coordinates[4][0] < idx_to_coordinates[20][0]:  # right hand
                 fingerBendStatus[0] = 1
-                cv2.putText(image, "thumb bent(right hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255),
-                            2)
+                # cv2.putText(image, "thumb bent(right hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255),2)
             elif idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] > \
                     idx_to_coordinates[4][0] > idx_to_coordinates[20][0]:  # left hand
                 fingerBendStatus[0] = 1
-                cv2.putText(image, "thumb bent(left hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                # cv2.putText(image, "thumb bent(left hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[0] = 0
 
             if idx_to_coordinates[8][1] > idx_to_coordinates[5][1] or idx_to_coordinates[7][1] > \
                     idx_to_coordinates[5][1]:
                 fingerBendStatus[1] = 1
-                cv2.putText(image, "index finger bent", (30, 60), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                # cv2.putText(image, "index finger bent", (30, 60), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[1] = 0
 
             if idx_to_coordinates[12][1] > idx_to_coordinates[9][1] or idx_to_coordinates[11][1] > \
                     idx_to_coordinates[9][1]:
                 fingerBendStatus[2] = 1
-                cv2.putText(image, "middle finger bent", (30, 90), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                # cv2.putText(image, "middle finger bent", (30, 90), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[2] = 0
 
             if idx_to_coordinates[16][1] > idx_to_coordinates[13][1] or idx_to_coordinates[15][1] > \
                     idx_to_coordinates[13][1]:
                 fingerBendStatus[3] = 1
-                cv2.putText(image, "ring finger bent", (30, 120), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                # cv2.putText(image, "ring finger bent", (30, 120), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[3] = 0
 
             if idx_to_coordinates[20][1] > idx_to_coordinates[17][1] or idx_to_coordinates[19][1] > \
                     idx_to_coordinates[17][1]:
                 fingerBendStatus[4] = 1
-                cv2.putText(image, "pinky bent", (30, 150), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                # cv2.putText(image, "pinky bent", (30, 150), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[4] = 0
         except:
