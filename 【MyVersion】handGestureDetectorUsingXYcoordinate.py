@@ -107,7 +107,8 @@ while cap.isOpened():
 
             if thumbAngle < 120:
                 fingerBendStatus[0] = 1
-                cv2.putText(image, "thumb bent, angle:" + str(thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6,(255, 255, 255), 2)
+                cv2.putText(image, "thumb bent, angle:" + str(thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6,
+                            (255, 255, 255), 2)
             # below is judge thumb bend with x,y coordinate
             # elif idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] < \
             #         idx_to_coordinates[4][0] < idx_to_coordinates[20][0]:  # right hand
