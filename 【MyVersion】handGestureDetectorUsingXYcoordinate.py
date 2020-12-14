@@ -79,6 +79,7 @@ while cap.isOpened():
 
         # below is to judge if finger has bent
         # TODO:focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
+        # 已知三點座標求夾角:https://tw.answers.yahoo.com/question/index?qid=20081223000016KK00623
         try:
             if idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] < \
                     idx_to_coordinates[4][0] < idx_to_coordinates[20][0]:  # right hand
@@ -124,31 +125,32 @@ while cap.isOpened():
 
         # below is hand gesture judge
         if fingerBendStatus == [1, 1, 1, 1, 1]:
-            cv2.putText(image, "Zero", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Zero", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [1, 0, 1, 1, 1]:
-            cv2.putText(image, "One", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "One", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [1, 0, 0, 1, 1]:
-            cv2.putText(image, "Two", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Two", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [1, 0, 0, 0, 1]:
-            cv2.putText(image, "Three", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Three", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [1, 0, 0, 0, 0]:
-            cv2.putText(image, "Four", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Four", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [0, 0, 0, 0, 0]:
-            cv2.putText(image, "Five", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Five", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [0, 1, 1, 1, 0]:
-            cv2.putText(image, "Six", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Six", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [0, 0, 1, 1, 1]:
-            cv2.putText(image, "Seven", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Seven", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [0, 0, 0, 1, 1]:
-            cv2.putText(image, "Eight", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Eight", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [0, 0, 0, 0, 1]:
-            cv2.putText(image, "Nine", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Nine", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [1, 1, 0, 0, 0]:
-            cv2.putText(image, "OK", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "OK", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         elif fingerBendStatus == [0, 0, 1, 1, 0]:
-            cv2.putText(image, "SpiderMan", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "SpiderMan", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0),
+                        2)
         elif fingerBendStatus == [1, 0, 1, 1, 0]:
-            cv2.putText(image, "Rock", (int(cam_width/2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            cv2.putText(image, "Rock", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
         # above is hand gesture judge
 
     cv2.imshow(window_name, image)
