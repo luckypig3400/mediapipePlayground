@@ -101,23 +101,26 @@ while cap.isOpened():
                                                      idx_to_coordinates[3][0], idx_to_coordinates[3][1],
                                                      idx_to_coordinates[2][0], idx_to_coordinates[2][1])
                 # print("thumbAngle:" + str(thumbAngle))
+                indexFingerAngle = calculate_3_point_angle(idx_to_coordinates[5][0], idx_to_coordinates[5][1],
+                                                           idx_to_coordinates[6][0], idx_to_coordinates[6][1],
+                                                           idx_to_coordinates[7][0], idx_to_coordinates[7][1])
+                middleFingerAngle = calculate_3_point_angle(idx_to_coordinates[9][0], idx_to_coordinates[9][1],
+                                                            idx_to_coordinates[10][0], idx_to_coordinates[10][1],
+                                                            idx_to_coordinates[11][0], idx_to_coordinates[11][1])
+                ringFingerAngle = calculate_3_point_angle(idx_to_coordinates[13][0], idx_to_coordinates[13][1],
+                                                          idx_to_coordinates[14][0], idx_to_coordinates[14][1],
+                                                          idx_to_coordinates[15][0], idx_to_coordinates[15][1])
+                pinkyAngle = calculate_3_point_angle(idx_to_coordinates[17][0], idx_to_coordinates[17][1],
+                                                     idx_to_coordinates[18][0], idx_to_coordinates[18][1],
+                                                     idx_to_coordinates[19][0], idx_to_coordinates[19][1])
             except:
-                thumbAngle = 180
+                # thumbAngle = 180
                 print("Oops found missing thumb point")
 
             if thumbAngle < 120:
                 fingerBendStatus[0] = 1
                 cv2.putText(image, "thumb bent, angle:" + str(thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6,
                             (255, 255, 255), 2)
-            # below is judge thumb bend with x,y coordinate
-            # elif idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] < \
-            #         idx_to_coordinates[4][0] < idx_to_coordinates[20][0]:  # right hand
-            #     fingerBendStatus[0] = 1
-            #     # cv2.putText(image, "thumb bent(right hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255),2)
-            # elif idx_to_coordinates[4][1] + 36 > idx_to_coordinates[3][1] and idx_to_coordinates[3][0] > \
-            #         idx_to_coordinates[4][0] > idx_to_coordinates[20][0]:  # left hand
-            #     fingerBendStatus[0] = 1
-            #     # cv2.putText(image, "thumb bent(left hand)", (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[0] = 0
 
