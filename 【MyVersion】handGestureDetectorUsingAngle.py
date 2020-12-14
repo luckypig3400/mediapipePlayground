@@ -124,31 +124,27 @@ while cap.isOpened():
             else:
                 fingerBendStatus[0] = 0
 
-            if idx_to_coordinates[8][1] > idx_to_coordinates[5][1] or idx_to_coordinates[7][1] > \
-                    idx_to_coordinates[5][1]:
+            if indexFingerAngle < 120:
                 fingerBendStatus[1] = 1
-                # cv2.putText(image, "index finger bent", (30, 60), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                cv2.putText(image, "index finger bent, angle:" + str(indexFingerAngle), (30, 60), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[1] = 0
 
-            if idx_to_coordinates[12][1] > idx_to_coordinates[9][1] or idx_to_coordinates[11][1] > \
-                    idx_to_coordinates[9][1]:
+            if middleFingerAngle < 120:
                 fingerBendStatus[2] = 1
-                # cv2.putText(image, "middle finger bent", (30, 90), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                cv2.putText(image, "middle finger bent, angle:" + str(middleFingerAngle), (30, 90), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[2] = 0
 
-            if idx_to_coordinates[16][1] > idx_to_coordinates[13][1] or idx_to_coordinates[15][1] > \
-                    idx_to_coordinates[13][1]:
+            if ringFingerAngle < 120:
                 fingerBendStatus[3] = 1
-                # cv2.putText(image, "ring finger bent", (30, 120), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                cv2.putText(image, "ring finger bent, angle:" + str(ringFingerAngle), (30, 120), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[3] = 0
 
-            if idx_to_coordinates[20][1] > idx_to_coordinates[17][1] or idx_to_coordinates[19][1] > \
-                    idx_to_coordinates[17][1]:
+            if pinkyAngle < 120:
                 fingerBendStatus[4] = 1
-                # cv2.putText(image, "pinky bent", (30, 150), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+                cv2.putText(image, "pinky bent, angle:" + str(pinkyAngle), (30, 150), cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[4] = 0
         except:
