@@ -6,7 +6,6 @@ import math
 
 desktop_width, desktop_height = pyautogui.size()
 
-
 def normalized_3_pixel_coordinates(
         normalized_x: float, normalized_y: float, normalized_z: float, image_width: int,
         image_height: int) -> [float, float, float]:
@@ -126,31 +125,39 @@ while cap.isOpened():
 
             if indexFingerAngle < 135:
                 fingerBendStatus[1] = 1
+                pyautogui.keyDown('1')
                 cv2.putText(image, "index finger bent, angle:" + str(indexFingerAngle), (30, 60),
                             cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[1] = 0
+                pyautogui.keyUp('1')
 
             if middleFingerAngle < 135:
                 fingerBendStatus[2] = 1
+                pyautogui.keyDown('2')
                 cv2.putText(image, "middle finger bent, angle:" + str(middleFingerAngle), (30, 90),
                             cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[2] = 0
+                pyautogui.keyUp('2')
 
             if ringFingerAngle < 135:
                 fingerBendStatus[3] = 1
+                pyautogui.keyDown('3')
                 cv2.putText(image, "ring finger bent, angle:" + str(ringFingerAngle), (30, 120),
                             cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
             else:
                 fingerBendStatus[3] = 0
+                pyautogui.keyUp('3')
 
             if pinkyAngle < 135:
                 fingerBendStatus[4] = 1
+                pyautogui.keyDown('4')
                 cv2.putText(image, "pinky bent, angle:" + str(pinkyAngle), (30, 150), cv2.FONT_HERSHEY_COMPLEX, 0.6,
                             (255, 255, 255), 2)
             else:
                 fingerBendStatus[4] = 0
+                pyautogui.keyUp('4')
         except:
             print("Oops found Missing Joints")
         # above is to judge if finger has bent
