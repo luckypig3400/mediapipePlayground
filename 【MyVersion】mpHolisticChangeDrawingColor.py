@@ -5,8 +5,8 @@ mp_drawing = mp.solutions.drawing_utils
 mp_holistic = mp.solutions.holistic
 
 webcamID = 1
-landmark_drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1, color=(0, 255, 255))
-connection_drawing_spec = mp_drawing.DrawingSpec(thickness=1, color=(255, 0, 0))
+landmark_drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1, color=(255, 255, 0))
+connection_drawing_spec = mp_drawing.DrawingSpec(thickness=2, color=(255, 255, 255))
 
 # For webcam input:
 holistic = mp_holistic.Holistic(
@@ -37,7 +37,7 @@ while cap.isOpened():
     mp_drawing.draw_landmarks(
         image, results.right_hand_landmarks, mp_holistic.HAND_CONNECTIONS)
     mp_drawing.draw_landmarks(
-        image, results.pose_landmarks, mp_holistic.POSE_CONNECTIONS)
+        image, results.pose_landmarks, mp_holistic.POSE_CONNECTIONS, landmark_drawing_spec, connection_drawing_spec)
     cv2.imshow('MediaPipe Holistic', image)
     if cv2.waitKey(5) & 0xFF == 27:
         break
