@@ -26,20 +26,6 @@ def normalized_3_pixel_coordinates(
     return x_px, y_px, z_px
 
 
-def calculate_3_point_angle(pointAx: float, pointAy: float, centerPointX: float, centerPointY: float, pointCx: float,
-                            pointCy: float) -> [float]:  # return angle
-    # 公式參考自:
-    # 已知三點座標求夾角:https://tw.answers.yahoo.com/question/index?qid=20081223000016KK00623
-    vectorU = [pointAx - centerPointX, pointAy - centerPointY]  # 向量U
-    vectorV = [pointCx - centerPointX, pointCy - centerPointY]  # 向量V
-    lenghOfVectorU = math.sqrt((vectorU[0] * vectorU[0] + vectorU[1] * vectorU[1]))
-    lenghOfVectorV = math.sqrt((vectorV[0] * vectorV[0] + vectorV[1] * vectorV[1]))
-    innerProduct_of_UV = vectorU[0] * vectorV[0] + vectorU[1] * vectorV[1]  # 向量U 與 向量V的內積
-    cosTheta = innerProduct_of_UV / (lenghOfVectorU * lenghOfVectorV)  # 向量U 與 向量V夾角的cosine值
-    angle_in_degree = math.acos(cosTheta) * 180 / math.pi  # 弧度*180/pi轉成角度
-    return angle_in_degree
-
-
 mp_drawing = mp.solutions.drawing_utils
 mp_hands = mp.solutions.hands
 webcam_id = 1
