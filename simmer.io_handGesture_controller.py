@@ -5,6 +5,7 @@ import pyautogui
 import math
 
 desktop_width, desktop_height = pyautogui.size()
+pyautogui.PAUSE = 0
 
 def normalized_3_pixel_coordinates(
         normalized_x: float, normalized_y: float, normalized_z: float, image_width: int,
