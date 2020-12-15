@@ -126,7 +126,7 @@ while cap.isOpened():
             else:
                 fingerBendStatus[0] = 0
 
-            if indexFingerAngle < 135:
+            if indexFingerAngle < 150:
                 fingerBendStatus[1] = 1
                 pyautogui.keyDown('1')
                 keyDownStatus[1] = 1
@@ -138,7 +138,7 @@ while cap.isOpened():
                     pyautogui.keyUp('1')
                     keyDownStatus[1] = 0
 
-            if middleFingerAngle < 135:
+            if middleFingerAngle < 150:
                 fingerBendStatus[2] = 1
                 keyDownStatus[2] = 1
                 pyautogui.keyDown('2')
@@ -150,7 +150,7 @@ while cap.isOpened():
                     pyautogui.keyUp('2')
                     keyDownStatus[2] = 0
 
-            if ringFingerAngle < 135:
+            if ringFingerAngle < 150:
                 fingerBendStatus[3] = 1
                 keyDownStatus[3] = 1
                 pyautogui.keyDown('3')
@@ -162,7 +162,7 @@ while cap.isOpened():
                     pyautogui.keyUp('3')
                     keyDownStatus[3] = 0
 
-            if pinkyAngle < 135:
+            if pinkyAngle < 150:
                 fingerBendStatus[4] = 1
                 keyDownStatus[4] = 1
                 pyautogui.keyDown('4')
