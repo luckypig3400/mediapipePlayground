@@ -306,10 +306,11 @@ while cap.isOpened():
             hand2_label = results.multi_handedness[1].classification[0].label
             # Extract classification label from results.multi_handedness
 
-            # TODO: judge hand2 finger bend status
+            # Finished: judge hand2 finger bend status
             judgehand2FingersBendStatus()
-            # TODO: hand2 gestrue judge
+            # Finished: hand2 gestrue judge
             hand2GestureJudge()
+            # TODO : simplify code if possible (make hand1 and hand2 judge func use same func with different params)
 
     cv2.imshow(window_name, image)
 
