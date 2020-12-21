@@ -80,39 +80,40 @@ while cap.isOpened():
             mp_drawing.draw_landmarks(
                 image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
+        print(len(results.multi_hand_landmarks))  # 輸出偵測到幾隻手
+
         image_rows, image_cols, _ = image.shape
-        idx_to_coordinates = []
+        hand1_coordinates = []
         for idx, landmark in enumerate(results.multi_hand_landmarks[0].landmark):
             if landmark.visibility < 0 or landmark.presence < 0:
                 continue
             landmark_px = normalized_3_pixel_coordinates(landmark.x, landmark.y, landmark.z, image_cols, image_rows)
             if landmark_px:
-                idx_to_coordinates.append(landmark_px)
-        # print("Before np.array Method:", idx_to_coordinates)
-        idx_to_coordinates = np.array(idx_to_coordinates)
-        # print("After np.array Method:", idx_to_coordinates)
+                hand1_coordinates.append(landmark_px)
+
+        hand1_coordinates = np.array(hand1_coordinates)
 
         # below is to judge if finger has bent
         # Finished :focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
         # 已知三點座標求夾角:https://tw.answers.yahoo.com/question/index?qid=20081223000016KK00623
         try:
             try:
-                thumbAngle = calculate_3_point_angle(idx_to_coordinates[4][0], idx_to_coordinates[4][1],
-                                                     idx_to_coordinates[3][0], idx_to_coordinates[3][1],
-                                                     idx_to_coordinates[2][0], idx_to_coordinates[2][1])
+                thumbAngle = calculate_3_point_angle(hand1_coordinates[4][0], hand1_coordinates[4][1],
+                                                     hand1_coordinates[3][0], hand1_coordinates[3][1],
+                                                     hand1_coordinates[2][0], hand1_coordinates[2][1])
                 # print("thumbAngle:" + str(thumbAngle))
-                indexFingerAngle = calculate_3_point_angle(idx_to_coordinates[5][0], idx_to_coordinates[5][1],
-                                                           idx_to_coordinates[6][0], idx_to_coordinates[6][1],
-                                                           idx_to_coordinates[7][0], idx_to_coordinates[7][1])
-                middleFingerAngle = calculate_3_point_angle(idx_to_coordinates[9][0], idx_to_coordinates[9][1],
-                                                            idx_to_coordinates[10][0], idx_to_coordinates[10][1],
-                                                            idx_to_coordinates[11][0], idx_to_coordinates[11][1])
-                ringFingerAngle = calculate_3_point_angle(idx_to_coordinates[13][0], idx_to_coordinates[13][1],
-                                                          idx_to_coordinates[14][0], idx_to_coordinates[14][1],
-                                                          idx_to_coordinates[15][0], idx_to_coordinates[15][1])
-                pinkyAngle = calculate_3_point_angle(idx_to_coordinates[17][0], idx_to_coordinates[17][1],
-                                                     idx_to_coordinates[18][0], idx_to_coordinates[18][1],
-                                                     idx_to_coordinates[19][0], idx_to_coordinates[19][1])
+                indexFingerAngle = calculate_3_point_angle(hand1_coordinates[5][0], hand1_coordinates[5][1],
+                                                           hand1_coordinates[6][0], hand1_coordinates[6][1],
+                                                           hand1_coordinates[7][0], hand1_coordinates[7][1])
+                middleFingerAngle = calculate_3_point_angle(hand1_coordinates[9][0], hand1_coordinates[9][1],
+                                                            hand1_coordinates[10][0], hand1_coordinates[10][1],
+                                                            hand1_coordinates[11][0], hand1_coordinates[11][1])
+                ringFingerAngle = calculate_3_point_angle(hand1_coordinates[13][0], hand1_coordinates[13][1],
+                                                          hand1_coordinates[14][0], hand1_coordinates[14][1],
+                                                          hand1_coordinates[15][0], hand1_coordinates[15][1])
+                pinkyAngle = calculate_3_point_angle(hand1_coordinates[17][0], hand1_coordinates[17][1],
+                                                     hand1_coordinates[18][0], hand1_coordinates[18][1],
+                                                     hand1_coordinates[19][0], hand1_coordinates[19][1])
             except:
                 # thumbAngle = 180
                 print("Oops found missing thumb point")
