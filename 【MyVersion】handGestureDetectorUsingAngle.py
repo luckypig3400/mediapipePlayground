@@ -117,8 +117,8 @@ def judgeFingersBendStatus():
     # ======above is to judge if finger has bent======
 
 
-def handGestureJudge():
-    # ======below is hand gesture judge======
+def hand1GestureJudge():
+    # ======below is hand1 gesture judge======
     if hand1_fingerBendStatus == [1, 1, 1, 1, 1]:
         hand1GestureJudgeResult = "Zero"
     elif hand1_fingerBendStatus == [1, 0, 1, 1, 1]:
@@ -149,7 +149,42 @@ def handGestureJudge():
         hand1GestureJudgeResult = "Undefined"
     cv2.putText(image, hand1_label + hand1GestureJudgeResult, (int(cam_width / 3 - 60), 60), cv2.FONT_HERSHEY_COMPLEX,
                 1.5, (0, 255, 0), 2)
-    # ======above is hand gesture judge======
+    # ======above is hand1 gesture judge======
+    
+
+def hand2GestureJudge():
+    # ======below is hand2 gesture judge======
+    if hand2_fingerBendStatus == [1, 1, 1, 1, 1]:
+        hand2GestureJudgeResult = "Zero"
+    elif hand2_fingerBendStatus == [1, 0, 1, 1, 1]:
+        hand2GestureJudgeResult = "One"
+    elif hand2_fingerBendStatus == [1, 0, 0, 1, 1]:
+        hand2GestureJudgeResult = "Two"
+    elif hand2_fingerBendStatus == [1, 0, 0, 0, 1]:
+        hand2GestureJudgeResult = "Three"
+    elif hand2_fingerBendStatus == [1, 0, 0, 0, 0]:
+        hand2GestureJudgeResult = "Four"
+    elif hand2_fingerBendStatus == [0, 0, 0, 0, 0]:
+        hand2GestureJudgeResult = "Five"
+    elif hand2_fingerBendStatus == [0, 1, 1, 1, 0]:
+        hand2GestureJudgeResult = "Six"
+    elif hand2_fingerBendStatus == [0, 0, 1, 1, 1]:
+        hand2GestureJudgeResult = "Seven"
+    elif hand2_fingerBendStatus == [0, 0, 0, 1, 1]:
+        hand2GestureJudgeResult = "Eight"
+    elif hand2_fingerBendStatus == [0, 0, 0, 0, 1]:
+        hand2GestureJudgeResult = "Nine"
+    elif hand2_fingerBendStatus == [1, 1, 0, 0, 0]:
+        hand2GestureJudgeResult = "OK"
+    elif hand2_fingerBendStatus == [0, 0, 1, 1, 0]:
+        hand2GestureJudgeResult = "SpiderMan"
+    elif hand2_fingerBendStatus == [1, 0, 1, 1, 0]:
+        hand2GestureJudgeResult = "Rock"
+    else:
+        hand2GestureJudgeResult = "Undefined"
+    cv2.putText(image, hand2_label + hand2GestureJudgeResult, (int(cam_width / 3 - 60), 120), cv2.FONT_HERSHEY_COMPLEX,
+                1.5, (0, 255, 0), 2)
+    # ======above is hand2 gesture judge======3
 
 
 while cap.isOpened():
