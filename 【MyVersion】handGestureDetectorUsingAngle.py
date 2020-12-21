@@ -61,8 +61,8 @@ def calculate_3_point_angle(pointAx: float, pointAy: float,
     angle_in_degree = math.acos(cosTheta) * 180 / math.pi  # 弧度*180/pi轉成角度
     return angle_in_degree
 
-def judgeFingersBendStatus():
-    # ======below is to judge if finger has bent======
+def judgehand1FingersBendStatus():
+    # ======below is to judge if fingers of hand1 has bent======
     # Finished :focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
     # 已知三點座標求夾角:https://tw.answers.yahoo.com/question/index?qid=20081223000016KK00623
     try:
@@ -114,7 +114,63 @@ def judgeFingersBendStatus():
         #             0.6, (255, 255, 255), 2)
     else:
         hand1_fingerBendStatus[4] = 0
-    # ======above is to judge if finger has bent======
+    # ======above is to judge if fingers of hand1 has bent======
+
+
+def judgehand2FingersBendStatus():
+    # ======below is to judge if fingers of hand2 has bent======
+    # Finished :focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
+    # 已知三點座標求夾角:https://tw.answers.yahoo.com/question/index?qid=20081223000016KK00623
+    try:
+        hand2_thumbAngle = calculate_3_point_angle(hand2_coordinates[4][0], hand2_coordinates[4][1],
+                                                   hand2_coordinates[3][0], hand2_coordinates[3][1],
+                                                   hand2_coordinates[2][0], hand2_coordinates[2][1])
+        hand2_indexFingerAngle = calculate_3_point_angle(hand2_coordinates[5][0], hand2_coordinates[5][1],
+                                                         hand2_coordinates[6][0], hand2_coordinates[6][1],
+                                                         hand2_coordinates[7][0], hand2_coordinates[7][1])
+        hand2_middleFingerAngle = calculate_3_point_angle(hand2_coordinates[9][0], hand2_coordinates[9][1],
+                                                          hand2_coordinates[10][0], hand2_coordinates[10][1],
+                                                          hand2_coordinates[11][0], hand2_coordinates[11][1])
+        hand2_ringFingerAngle = calculate_3_point_angle(hand2_coordinates[13][0], hand2_coordinates[13][1],
+                                                        hand2_coordinates[14][0], hand2_coordinates[14][1],
+                                                        hand2_coordinates[15][0], hand2_coordinates[15][1])
+        hand2_pinkyAngle = calculate_3_point_angle(hand2_coordinates[17][0], hand2_coordinates[17][1],
+                                                   hand2_coordinates[18][0], hand2_coordinates[18][1],
+                                                   hand2_coordinates[19][0], hand2_coordinates[19][1])
+    except:
+        print("Oops found Missing Joints")
+
+    if hand2_thumbAngle < 150:
+        hand2_fingerBendStatus[0] = 1
+        # cv2.putText(image, "thumb bent, angle:" + str(hand2_thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX,
+        #             0.6, (255, 255, 255), 2)
+    else:
+        hand2_fingerBendStatus[0] = 0
+    if hand2_indexFingerAngle < 135:
+        hand2_fingerBendStatus[1] = 1
+        # cv2.putText(image, "index finger bent, angle:" + str(hand2_indexFingerAngle), (30, 60),
+        #             cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+    else:
+        hand2_fingerBendStatus[1] = 0
+    if hand2_middleFingerAngle < 135:
+        hand2_fingerBendStatus[2] = 1
+        # cv2.putText(image, "middle finger bent, angle:" + str(hand2_middleFingerAngle), (30, 90),
+        #             cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+    else:
+        hand2_fingerBendStatus[2] = 0
+    if hand2_ringFingerAngle < 135:
+        hand2_fingerBendStatus[3] = 1
+        # cv2.putText(image, "ring finger bent, angle:" + str(hand2_ringFingerAngle), (30, 120),
+        #             cv2.FONT_HERSHEY_COMPLEX, 0.6, (255, 255, 255), 2)
+    else:
+        hand2_fingerBendStatus[3] = 0
+    if hand2_pinkyAngle < 135:
+        hand2_fingerBendStatus[4] = 1
+        # cv2.putText(image, "pinky bent, angle:" + str(hand2_pinkyAngle), (30, 150), cv2.FONT_HERSHEY_COMPLEX,
+        #             0.6, (255, 255, 255), 2)
+    else:
+        hand2_fingerBendStatus[4] = 0
+    # ======above is to judge if fingers of hand2 has bent======
 
 
 def hand1GestureJudge():
