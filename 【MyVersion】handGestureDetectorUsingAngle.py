@@ -61,6 +61,7 @@ def calculate_3_point_angle(pointAx: float, pointAy: float,
     angle_in_degree = math.acos(cosTheta) * 180 / math.pi  # 弧度*180/pi轉成角度
     return angle_in_degree
 
+
 def judgehand1FingersBendStatus():
     # ======below is to judge if fingers of hand1 has bent======
     # Finished :focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
@@ -82,7 +83,7 @@ def judgehand1FingersBendStatus():
                                                    hand1_coordinates[18][0], hand1_coordinates[18][1],
                                                    hand1_coordinates[19][0], hand1_coordinates[19][1])
     except:
-        print("Oops found Missing Joints")
+        print("Oops found Missing Joints in hand1 `(*>﹏<*)′")
 
     if hand1_thumbAngle < 150:
         hand1_fingerBendStatus[0] = 1
@@ -138,7 +139,7 @@ def judgehand2FingersBendStatus():
                                                    hand2_coordinates[18][0], hand2_coordinates[18][1],
                                                    hand2_coordinates[19][0], hand2_coordinates[19][1])
     except:
-        print("Oops found Missing Joints")
+        print("Oops found Missing Joints in hand2 `(*>﹏<*)′")
 
     if hand2_thumbAngle < 150:
         hand2_fingerBendStatus[0] = 1
@@ -206,7 +207,7 @@ def hand1GestureJudge():
     cv2.putText(image, hand1_label + hand1GestureJudgeResult, (int(cam_width / 3 - 60), 60), cv2.FONT_HERSHEY_COMPLEX,
                 1.5, (0, 255, 0), 2)
     # ======above is hand1 gesture judge======
-    
+
 
 def hand2GestureJudge():
     # ======below is hand2 gesture judge======
@@ -278,6 +279,9 @@ while cap.isOpened():
         hand1_label = results.multi_handedness[0].classification[0].label
         # Extract classification label from results.multi_handedness
 
+        judgehand1FingersBendStatus()
+        hand1GestureJudge()
+
         if len(results.multi_hand_landmarks) == 2:
             hand2_coordinates = []
             for idx, landmark in enumerate(results.multi_hand_landmarks[1].landmark):
@@ -293,7 +297,9 @@ while cap.isOpened():
             # Extract classification label from results.multi_handedness
 
             # TODO: judge hand2 finger bend status
+            judgehand2FingersBendStatus()
             # TODO: hand2 gestrue judge
+            hand2GestureJudge()
 
     cv2.imshow(window_name, image)
 
