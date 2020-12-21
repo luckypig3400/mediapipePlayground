@@ -80,28 +80,8 @@ while cap.isOpened():
             mp_drawing.draw_landmarks(
                 image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-        #  ====== fetch Left/Right label from results.multi_handedness ======  #
-        # print('Handedness:', results.multi_handedness)  # above mediapipe 0.8.1 provide handedness to show Left or Right hand
-        #
-        # print(results.multi_handedness[0])
-        """
-        data inside results.multi_handedness[0]:
-        classification {
-            index: 0
-            score: 0.999981701374054
-            label: "Left"
-        }
-        """
-
-        # print(type(results.multi_handedness))  # <class 'list'>
-        # print(type(
-        #     results.multi_handedness[0]))  # <class 'mediapipe.framework.formats.classification_pb2.ClassificationList'>
-
         print(results.multi_handedness[0].classification[0].label)
         # Extract classification label from results.multi_handedness
-
-        # print(len(results.multi_hand_landmarks))  # 輸出偵測到幾隻手
-        #  ====== fetch Left/Right label from results.multi_handedness ======  #
 
         image_rows, image_cols, _ = image.shape
         hand1_coordinates = []
@@ -123,7 +103,7 @@ while cap.isOpened():
 
         hand1_coordinates = np.array(hand1_coordinates)
 
-        # below is to judge if finger has bent
+        # ======below is to judge if finger has bent======
         # Finished :focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
         # 已知三點座標求夾角:https://tw.answers.yahoo.com/question/index?qid=20081223000016KK00623
         try:
@@ -131,7 +111,6 @@ while cap.isOpened():
                 hand1_thumbAngle = calculate_3_point_angle(hand1_coordinates[4][0], hand1_coordinates[4][1],
                                                            hand1_coordinates[3][0], hand1_coordinates[3][1],
                                                            hand1_coordinates[2][0], hand1_coordinates[2][1])
-                # print("hand1_hand1_thumbAngle:" + str(hand1_hand1_thumbAngle))
                 hand1_indexFingerAngle = calculate_3_point_angle(hand1_coordinates[5][0], hand1_coordinates[5][1],
                                                                  hand1_coordinates[6][0], hand1_coordinates[6][1],
                                                                  hand1_coordinates[7][0], hand1_coordinates[7][1])
@@ -145,13 +124,12 @@ while cap.isOpened():
                                                            hand1_coordinates[18][0], hand1_coordinates[18][1],
                                                            hand1_coordinates[19][0], hand1_coordinates[19][1])
             except:
-                # hand1_thumbAngle = 180
                 print("Oops found missing thumb point")
 
             if hand1_thumbAngle < 150:
                 hand1_fingerBendStatus[0] = 1
-                # cv2.putText(image, "thumb bent, angle:" + str(hand1_thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX, 0.6,
-                #             (255, 255, 255), 2)
+                # cv2.putText(image, "thumb bent, angle:" + str(hand1_thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX,
+                #             0.6, (255, 255, 255), 2)
             else:
                 hand1_fingerBendStatus[0] = 0
 
@@ -178,15 +156,15 @@ while cap.isOpened():
 
             if hand1_pinkyAngle < 135:
                 hand1_fingerBendStatus[4] = 1
-                # cv2.putText(image, "pinky bent, angle:" + str(hand1_pinkyAngle), (30, 150), cv2.FONT_HERSHEY_COMPLEX, 0.6,
-                #             (255, 255, 255), 2)
+                # cv2.putText(image, "pinky bent, angle:" + str(hand1_pinkyAngle), (30, 150), cv2.FONT_HERSHEY_COMPLEX,
+                #             0.6, (255, 255, 255), 2)
             else:
                 hand1_fingerBendStatus[4] = 0
         except:
             print("Oops found Missing Joints")
-        # above is to judge if finger has bent
+        # ======above is to judge if finger has bent======
 
-        # below is hand gesture judge
+        # ======below is hand gesture judge======
         if hand1_fingerBendStatus == [1, 1, 1, 1, 1]:
             handGestureJudgeResult = "Zero"
         elif hand1_fingerBendStatus == [1, 0, 1, 1, 1]:
@@ -215,7 +193,7 @@ while cap.isOpened():
             handGestureJudgeResult = "Rock"
         cv2.putText(image, handGestureJudgeResult, (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5,
                     (0, 255, 0), 2)
-        # above is hand gesture judge
+        # ======above is hand gesture judge======
 
     cv2.imshow(window_name, image)
 
