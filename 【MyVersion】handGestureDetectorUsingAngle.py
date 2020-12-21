@@ -166,41 +166,79 @@ while cap.isOpened():
             #             0.6, (255, 255, 255), 2)
             else:
                 hand1_fingerBendStatus[4] = 0
+            if len(results.multi_hand_landmark) == 2:
+                hand2_thumbAngle = calculate_3_point_angle(hand2_coordinates[4][0], hand2_coordinates[4][1],
+                                                           hand2_coordinates[3][0], hand2_coordinates[3][1],
+                                                           hand2_coordinates[2][0], hand2_coordinates[2][1])
+                hand2_indexFingerAngle = calculate_3_point_angle(hand2_coordinates[5][0], hand2_coordinates[5][1],
+                                                                 hand2_coordinates[6][0], hand2_coordinates[6][1],
+                                                                 hand2_coordinates[7][0], hand2_coordinates[7][1])
+                hand2_middleFingerAngle = calculate_3_point_angle(hand2_coordinates[9][0], hand2_coordinates[9][1],
+                                                                  hand2_coordinates[10][0], hand2_coordinates[10][1],
+                                                                  hand2_coordinates[11][0], hand2_coordinates[11][1])
+                hand2_ringFingerAngle = calculate_3_point_angle(hand2_coordinates[13][0], hand2_coordinates[13][1],
+                                                                hand2_coordinates[14][0], hand2_coordinates[14][1],
+                                                                hand2_coordinates[15][0], hand2_coordinates[15][1])
+                hand2_pinkyAngle = calculate_3_point_angle(hand2_coordinates[17][0], hand2_coordinates[17][1],
+                                                           hand2_coordinates[18][0], hand2_coordinates[18][1],
+                                                           hand2_coordinates[19][0], hand2_coordinates[19][1])
+
+                if hand2_thumbAngle < 150:
+                    hand2_fingerBendStatus[0] = 1
+                else:
+                    hand2_fingerBendStatus[0] = 0
+                if hand2_indexFingerAngle < 135:
+                    hand2_fingerBendStatus[1] = 1
+                else:
+                    hand2_fingerBendStatus[1] = 0
+                if hand2_middleFingerAngle < 135:
+                    hand2_fingerBendStatus[2] = 1
+                else:
+                    hand2_fingerBendStatus[2] = 0
+                if hand2_ringFingerAngle < 135:
+                    hand2_fingerBendStatus[3] = 1
+                else:
+                    hand2_fingerBendStatus[3] = 0
+                if hand2_pinkyAngle < 135:
+                    hand2_fingerBendStatus[4] = 1
+                else:
+                    hand2_fingerBendStatus[4] = 0
+
         except:
             print("Oops found Missing Joints")
     # ======above is to judge if finger has bent======
 
     # ======below is hand gesture judge======
     if hand1_fingerBendStatus == [1, 1, 1, 1, 1]:
-        handGestureJudgeResult = "Zero"
+        hand1GestureJudgeResult = "Zero"
     elif hand1_fingerBendStatus == [1, 0, 1, 1, 1]:
-        handGestureJudgeResult = "One"
+        hand1GestureJudgeResult = "One"
     elif hand1_fingerBendStatus == [1, 0, 0, 1, 1]:
-        handGestureJudgeResult = "Two"
+        hand1GestureJudgeResult = "Two"
     elif hand1_fingerBendStatus == [1, 0, 0, 0, 1]:
-        handGestureJudgeResult = "Three"
+        hand1GestureJudgeResult = "Three"
     elif hand1_fingerBendStatus == [1, 0, 0, 0, 0]:
-        handGestureJudgeResult = "Four"
+        hand1GestureJudgeResult = "Four"
     elif hand1_fingerBendStatus == [0, 0, 0, 0, 0]:
-        handGestureJudgeResult = "Five"
+        hand1GestureJudgeResult = "Five"
     elif hand1_fingerBendStatus == [0, 1, 1, 1, 0]:
-        handGestureJudgeResult = "Six"
+        hand1GestureJudgeResult = "Six"
     elif hand1_fingerBendStatus == [0, 0, 1, 1, 1]:
-        handGestureJudgeResult = "Seven"
+        hand1GestureJudgeResult = "Seven"
     elif hand1_fingerBendStatus == [0, 0, 0, 1, 1]:
-        handGestureJudgeResult = "Eight"
+        hand1GestureJudgeResult = "Eight"
     elif hand1_fingerBendStatus == [0, 0, 0, 0, 1]:
-        handGestureJudgeResult = "Nine"
+        hand1GestureJudgeResult = "Nine"
     elif hand1_fingerBendStatus == [1, 1, 0, 0, 0]:
-        handGestureJudgeResult = "OK"
+        hand1GestureJudgeResult = "OK"
     elif hand1_fingerBendStatus == [0, 0, 1, 1, 0]:
-        handGestureJudgeResult = "SpiderMan"
+        hand1GestureJudgeResult = "SpiderMan"
     elif hand1_fingerBendStatus == [1, 0, 1, 1, 0]:
-        handGestureJudgeResult = "Rock"
+        hand1GestureJudgeResult = "Rock"
     else:
-        handGestureJudgeResult = "Undefined"
-    cv2.putText(image, hand1_label + handGestureJudgeResult, (int(cam_width / 3 - 60), 60), cv2.FONT_HERSHEY_COMPLEX,
-                1.5,(0, 255, 0), 2)
+        hand1GestureJudgeResult = "Undefined"
+    cv2.putText(image, hand1_label + hand1GestureJudgeResult, (int(cam_width / 3 - 60), 60), cv2.FONT_HERSHEY_COMPLEX,
+                1.5, (0, 255, 0), 2)
     # ======above is hand gesture judge======
 
     cv2.imshow(window_name, image)
