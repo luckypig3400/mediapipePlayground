@@ -59,6 +59,9 @@ cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREE
 cv2.resizeWindow(window_name, cam_width, cam_height)
 cv2.moveWindow(window_name, 300, 300)
 hand1_fingerBendStatus = [0, 0, 0, 0, 0]  # 0~4 : thumb~pinky
+hand2_fingerBendStatus = [0, 0, 0, 0, 0]  # 0~4 : thumb~pinky
+hand1_label = ""
+hand2_label = ""
 
 while cap.isOpened():
     success, image = cap.read()
@@ -81,9 +84,6 @@ while cap.isOpened():
             mp_drawing.draw_landmarks(
                 image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
-        print(results.multi_handedness[0].classification[0].label)
-        # Extract classification label from results.multi_handedness
-
         image_rows, image_cols, _ = image.shape
         hand1_coordinates = []
         for idx, landmark in enumerate(results.multi_hand_landmarks[0].landmark):
@@ -93,8 +93,13 @@ while cap.isOpened():
             if landmark_px:
                 hand1_coordinates.append(landmark_px)
 
-        hand2_coordinates = []
+        hand1_coordinates = np.array(hand1_coordinates)
+
+        hand1_label = results.multi_handedness[0].classification[0].label
+        # Extract classification label from results.multi_handedness
+
         if len(results.multi_hand_landmarks) == 2:
+            hand2_coordinates = []
             for idx, landmark in enumerate(results.multi_hand_landmarks[1].landmark):
                 if landmark.visibility < 0 or landmark.presence < 0:
                     continue
@@ -102,7 +107,10 @@ while cap.isOpened():
                 if landmark_px:
                     hand2_coordinates.append(landmark_px)
 
-        hand1_coordinates = np.array(hand1_coordinates)
+            hand2_coordinates = np.array(hand2_coordinates)
+
+            hand2_label = results.multi_handedness[1].classification[0].label
+            # Extract classification label from results.multi_handedness
 
         # ======below is to judge if finger has bent======
         # Finished :focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
@@ -191,14 +199,14 @@ while cap.isOpened():
         handGestureJudgeResult = "Rock"
     else:
         handGestureJudgeResult = "Undefined"
-    cv2.putText(image, handGestureJudgeResult, (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5,
-                (0, 255, 0), 2)
+    cv2.putText(image, hand1_label + handGestureJudgeResult, (int(cam_width / 3 - 60), 60), cv2.FONT_HERSHEY_COMPLEX,
+                1.5,(0, 255, 0), 2)
     # ======above is hand gesture judge======
 
-cv2.imshow(window_name, image)
+    cv2.imshow(window_name, image)
 
-if cv2.waitKey(5) & 0xFF == 27:
-    break
+    if cv2.waitKey(5) & 0xFF == 27:
+        break
 
 hands.close()
 cap.release()
