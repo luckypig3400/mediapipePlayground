@@ -83,6 +83,11 @@ def judgehand1FingersBendStatus():
                                                    hand1_coordinates[18][0], hand1_coordinates[18][1],
                                                    hand1_coordinates[19][0], hand1_coordinates[19][1])
     except:
+        hand1_thumbAngle = 180
+        hand1_indexFingerAngle = 180
+        hand1_middleFingerAngle = 180
+        hand1_ringFingerAngle = 180
+        hand1_pinkyAngle = 180
         print("Oops found Missing Joints in hand1 `(*>﹏<*)′")
 
     if hand1_thumbAngle < 150:
@@ -139,6 +144,11 @@ def judgehand2FingersBendStatus():
                                                    hand2_coordinates[18][0], hand2_coordinates[18][1],
                                                    hand2_coordinates[19][0], hand2_coordinates[19][1])
     except:
+        hand2_thumbAngle = 180
+        hand2_indexFingerAngle = 180
+        hand2_middleFingerAngle = 180
+        hand2_ringFingerAngle = 180
+        hand2_pinkyAngle = 180
         print("Oops found Missing Joints in hand2 `(*>﹏<*)′")
 
     if hand2_thumbAngle < 150:
