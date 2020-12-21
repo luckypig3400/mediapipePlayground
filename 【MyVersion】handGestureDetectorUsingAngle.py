@@ -4,6 +4,27 @@ import numpy as np
 import pyautogui
 import math
 
+mp_drawing = mp.solutions.drawing_utils
+mp_hands = mp.solutions.hands
+webcam_id = 1
+window_name = 'Hand Gesture Detector'
+
+hands = mp_hands.Hands(
+    min_detection_confidence=0.7, min_tracking_confidence=0.5)
+
+cap = cv2.VideoCapture(webcam_id, cv2.CAP_DSHOW)
+
+cam_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
+cam_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
+# cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
+cv2.resizeWindow(window_name, cam_width, cam_height)
+cv2.moveWindow(window_name, 300, 300)
+hand1_fingerBendStatus = [0, 0, 0, 0, 0]  # 0~4 : thumb~pinky
+hand2_fingerBendStatus = [0, 0, 0, 0, 0]  # 0~4 : thumb~pinky
+hand1_label = ""
+hand2_label = ""
 desktop_width, desktop_height = pyautogui.size()
 
 
@@ -40,28 +61,6 @@ def calculate_3_point_angle(pointAx: float, pointAy: float,
     angle_in_degree = math.acos(cosTheta) * 180 / math.pi  # 弧度*180/pi轉成角度
     return angle_in_degree
 
-
-mp_drawing = mp.solutions.drawing_utils
-mp_hands = mp.solutions.hands
-webcam_id = 1
-window_name = 'Hand Gesture Detector'
-
-hands = mp_hands.Hands(
-    min_detection_confidence=0.7, min_tracking_confidence=0.5)
-
-cap = cv2.VideoCapture(webcam_id, cv2.CAP_DSHOW)
-
-cam_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
-cam_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
-cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
-cv2.setWindowProperty(window_name, cv2.WND_PROP_FULLSCREEN, cv2.WINDOW_FULLSCREEN)
-# cv2.setWindowProperty(window_name, cv2.WND_PROP_TOPMOST, 1)
-cv2.resizeWindow(window_name, cam_width, cam_height)
-cv2.moveWindow(window_name, 300, 300)
-hand1_fingerBendStatus = [0, 0, 0, 0, 0]  # 0~4 : thumb~pinky
-hand2_fingerBendStatus = [0, 0, 0, 0, 0]  # 0~4 : thumb~pinky
-hand1_label = ""
-hand2_label = ""
 
 while cap.isOpened():
     success, image = cap.read()
