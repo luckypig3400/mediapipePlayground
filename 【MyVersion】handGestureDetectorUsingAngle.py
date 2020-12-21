@@ -93,7 +93,7 @@ while cap.isOpened():
         # print("After np.array Method:", idx_to_coordinates)
 
         # below is to judge if finger has bent
-        # TODO:focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
+        # Finished :focus on thumb bend accuracy and Three judge accuracy(use angle to judge if finger has bent)
         # 已知三點座標求夾角:https://tw.answers.yahoo.com/question/index?qid=20081223000016KK00623
         try:
             try:

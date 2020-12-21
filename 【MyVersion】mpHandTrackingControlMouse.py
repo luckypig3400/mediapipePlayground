@@ -54,13 +54,30 @@ while cap.isOpened():
                 idx_to_coordinates[idx] = landmark_px
                 if idx == 4:  # thumb TIP x,y position
                     thumbTIP_x, thumbTIP_y = idx_to_coordinates[4]
-                    # print(idx, ":(thumb TIP)", idx_to_coordinates[idx])
+
+                    # debug coordinate info for thumb
+                    cv2.putText(image, "(" + str(thumbTIP_x) + "," + str(thumbTIP_y) + ")", (thumbTIP_x, thumbTIP_y),
+                                cv2.FONT_HERSHEY_COMPLEX, 0.6,
+                                (255, 255, 255), 2)
+
                 if idx == 8:  # index Finger TIP x,y position
                     indexFingerTIP_x, indexFingerTIP_y = idx_to_coordinates[8]
                     # if idx_to_coordinates[8] is not None then store them in x,y variables
-                    # print(idx, ":(index TIP)", idx_to_coordinates[idx])
+
+                    # debug coordinate info for index finger
+                    cv2.putText(image, "(" + str(indexFingerTIP_x) + "," + str(indexFingerTIP_y) + ")",
+                                (indexFingerTIP_x, indexFingerTIP_y),
+                                cv2.FONT_HERSHEY_COMPLEX, 0.6,
+                                (255, 255, 255), 2)
+
                 if idx == 12:  # middle Finger TIP x,y position
                     middleFingerTIP_x, middleFingerTIP_y = idx_to_coordinates[12]
+
+                    # debug coordinate info for middle finger
+                    cv2.putText(image, "(" + str(middleFingerTIP_x) + "," + str(middleFingerTIP_y) + ")",
+                                (middleFingerTIP_x, middleFingerTIP_y),
+                                cv2.FONT_HERSHEY_COMPLEX, 0.6,
+                                (255, 255, 255), 2)
 
         # Screen Monitor
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
@@ -68,11 +85,11 @@ while cap.isOpened():
         if abs(lastMouseMoveMillis - millis) >= 30:  # 每30毫秒移動一次滑鼠
             pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
             lastMouseMoveMillis = millis
-        if abs(thumbTIP_x - indexFingerTIP_x) <= 6 and abs(thumbTIP_y - indexFingerTIP_y) <= 9:
+        if abs(thumbTIP_x - indexFingerTIP_x) <= 18 and abs(thumbTIP_y - indexFingerTIP_y) <= 18:
             if abs(lastMouseLeftClickMillis - millis) >= 900:  # 每900毫秒可以點擊滑鼠左鍵
                 pyautogui.leftClick()
                 lastMouseLeftClickMillis = millis
-        if abs(thumbTIP_x - middleFingerTIP_x) <= 6 and abs(thumbTIP_y - middleFingerTIP_y) <= 6:
+        if abs(thumbTIP_x - middleFingerTIP_x) <= 18 and abs(thumbTIP_y - middleFingerTIP_y) <= 18:
             if abs(lastMouseRightClickMillis - millis) >= 900:  # 每900毫秒可以點擊滑鼠右鍵
                 pyautogui.rightClick()
                 lastMouseRightClickMillis = millis
