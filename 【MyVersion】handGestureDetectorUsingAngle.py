@@ -97,8 +97,8 @@ while cap.isOpened():
         # print(type(
         #     results.multi_handedness[0]))  # <class 'mediapipe.framework.formats.classification_pb2.ClassificationList'>
 
-        print(results.multi_handedness[0].classification[
-                  0].label)  # Extract classification label from results.multi_handedness
+        print(results.multi_handedness[0].classification[0].label)
+        # Extract classification label from results.multi_handedness
 
         # print(len(results.multi_hand_landmarks))  # 輸出偵測到幾隻手
         #  ====== fetch Left/Right label from results.multi_handedness ======  #
@@ -188,32 +188,33 @@ while cap.isOpened():
 
         # below is hand gesture judge
         if hand1_fingerBendStatus == [1, 1, 1, 1, 1]:
-            cv2.putText(image, "Zero", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Zero"
         elif hand1_fingerBendStatus == [1, 0, 1, 1, 1]:
-            cv2.putText(image, "One", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "One"
         elif hand1_fingerBendStatus == [1, 0, 0, 1, 1]:
-            cv2.putText(image, "Two", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Two"
         elif hand1_fingerBendStatus == [1, 0, 0, 0, 1]:
-            cv2.putText(image, "Three", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Three"
         elif hand1_fingerBendStatus == [1, 0, 0, 0, 0]:
-            cv2.putText(image, "Four", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Four"
         elif hand1_fingerBendStatus == [0, 0, 0, 0, 0]:
-            cv2.putText(image, "Five", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Five"
         elif hand1_fingerBendStatus == [0, 1, 1, 1, 0]:
-            cv2.putText(image, "Six", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Six"
         elif hand1_fingerBendStatus == [0, 0, 1, 1, 1]:
-            cv2.putText(image, "Seven", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Seven"
         elif hand1_fingerBendStatus == [0, 0, 0, 1, 1]:
-            cv2.putText(image, "Eight", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Eight"
         elif hand1_fingerBendStatus == [0, 0, 0, 0, 1]:
-            cv2.putText(image, "Nine", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Nine"
         elif hand1_fingerBendStatus == [1, 1, 0, 0, 0]:
-            cv2.putText(image, "OK", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "OK"
         elif hand1_fingerBendStatus == [0, 0, 1, 1, 0]:
-            cv2.putText(image, "SpiderMan", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0),
-                        2)
+            handGestureJudgeResult = "SpiderMan"
         elif hand1_fingerBendStatus == [1, 0, 1, 1, 0]:
-            cv2.putText(image, "Rock", (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5, (0, 255, 0), 2)
+            handGestureJudgeResult = "Rock"
+        cv2.putText(image, handGestureJudgeResult, (int(cam_width / 2 - 60), 60), cv2.FONT_HERSHEY_COMPLEX, 1.5,
+                    (0, 255, 0), 2)
         # above is hand gesture judge
 
     cv2.imshow(window_name, image)
