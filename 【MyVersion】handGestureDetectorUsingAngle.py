@@ -80,7 +80,28 @@ while cap.isOpened():
             mp_drawing.draw_landmarks(
                 image, hand_landmarks, mp_hands.HAND_CONNECTIONS)
 
+        #  ====== fetch Left/Right label from results.multi_handedness ======  #
+        print('Handedness:', results.multi_handedness)  # above mediapipe 0.8.1 provide handedness to show Left or Right hand
+
+        print(results.multi_handedness[0])
+        """
+        data inside results.multi_handedness[0]:
+        classification {
+            index: 0
+            score: 0.999981701374054
+            label: "Left"
+        }
+        """
+
+        print(type(results.multi_handedness))  # <class 'list'>
+        print(type(
+            results.multi_handedness[0]))  # <class 'mediapipe.framework.formats.classification_pb2.ClassificationList'>
+
+        print(results.multi_handedness[0].classification[
+                  0].label)  # Extract classification label from results.multi_handedness
+
         print(len(results.multi_hand_landmarks))  # 輸出偵測到幾隻手
+        #  ====== fetch Left/Right label from results.multi_handedness ======  #
 
         image_rows, image_cols, _ = image.shape
         hand1_coordinates = []
