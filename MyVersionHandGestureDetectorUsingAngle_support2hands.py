@@ -25,6 +25,8 @@ hand1_fingerBendStatus = [0, 0, 0, 0, 0]  # 0~4 : thumb~pinky
 hand2_fingerBendStatus = [0, 0, 0, 0, 0]  # 0~4 : thumb~pinky
 hand1_label = ""
 hand2_label = ""
+hand1GestureJudgeResult = ""
+hand2GestureJudgeResult = ""
 desktop_width, desktop_height = pyautogui.size()
 
 
