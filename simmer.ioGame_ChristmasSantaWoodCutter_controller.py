@@ -14,3 +14,5 @@ if (twoHandGesture.hand1_label == "Left" and twoHandGesture.hand1GestureJudgeRes
 if (twoHandGesture.hand1_label == "Right" and twoHandGesture.hand1GestureJudgeResult == "Zero") or (
         twoHandGesture.hand2_label == "Right" and twoHandGesture.hand2GestureJudgeResult == "Zero"):
     print("YA~ should send left click signal on Right side of screen")
+
+# TODO: fix no reaction to the imported variables
