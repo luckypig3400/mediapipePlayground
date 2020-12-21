@@ -60,6 +60,16 @@ while cap.isOpened():
                                 cv2.FONT_HERSHEY_COMPLEX, 0.6,
                                 (255, 255, 255), 2)
 
+                if idx == 5:  # index Finger MCP x,y position
+                    indexFingerMCP_x, indexFingerMCP_y = idx_to_coordinates[5]
+                    # if idx_to_coordinates[5] is not None then store them in x,y variables
+
+                    # debug coordinate info for index finger
+                    cv2.putText(image, "(" + str(indexFingerMCP_x) + "," + str(indexFingerMCP_y) + ")",
+                                (indexFingerMCP_x, indexFingerMCP_y),
+                                cv2.FONT_HERSHEY_COMPLEX, 0.6,
+                                (255, 255, 255), 2)
+
                 if idx == 8:  # index Finger TIP x,y position
                     indexFingerTIP_x, indexFingerTIP_y = idx_to_coordinates[8]
                     # if idx_to_coordinates[8] is not None then store them in x,y variables
@@ -83,7 +93,8 @@ while cap.isOpened():
         window_x, window_y, window_w, window_h = cv2.getWindowImageRect(window_name)
         # TODO divide webcam area to four grid, each grid will use different Mathematical formula to calculate mouse position
         if abs(lastMouseMoveMillis - millis) >= 30:  # 每30毫秒移動一次滑鼠
-            pyautogui.moveTo(indexFingerTIP_x / window_w * desktop_width, indexFingerTIP_y / window_h * desktop_height)
+            # 使用食指的MCP關節點來移動鼠標位置可以大幅減少手指作出點擊動作時造成的抖動
+            pyautogui.moveTo(indexFingerMCP_x / window_w * desktop_width, indexFingerMCP_y / window_h * desktop_height)
             lastMouseMoveMillis = millis
         if abs(thumbTIP_x - indexFingerTIP_x) <= 18 and abs(thumbTIP_y - indexFingerTIP_y) <= 18:
             if abs(lastMouseLeftClickMillis - millis) >= 900:  # 每900毫秒可以點擊滑鼠左鍵
