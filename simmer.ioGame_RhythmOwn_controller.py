@@ -4,6 +4,8 @@ import numpy as np
 import pyautogui
 import math
 
+# for this game:Rhythm Own
+# https://i.simmer.io/@natsupy/rhythm-own
 desktop_width, desktop_height = pyautogui.size()
 pyautogui.PAUSE = 0
 keyDownStatus = [0, 0, 0, 0, 0]
