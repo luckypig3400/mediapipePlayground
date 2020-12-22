@@ -4,49 +4,28 @@
 
 from multiprocessing import Process
 
-
 def twoHandsGestureDetector():
-    # import MyVersion_HandGestureDetectorUsingAngle_support2hands as twoHandGesture
-    print("Hello")
+    twoHandGesture
+    pass
 
+def watcher():
 
-def func1():
-    print('func1: starting')
-    for i in range(600000):
-        print("func1 progress:" + str(i))
-        pass
-    print('func1: finishing')
+    if (twoHandGesture.hand1_label == "Left" and twoHandGesture.hand1GestureJudgeResult == "Zero") or (
+            twoHandGesture.hand2_label == "Left" and twoHandGesture.hand2GestureJudgeResult == "Zero"):
+        print("YA~ should send left click signal on Left side of screen")
 
+    if (twoHandGesture.hand1_label == "Right" and twoHandGesture.hand1GestureJudgeResult == "Zero") or (
+            twoHandGesture.hand2_label == "Right" and twoHandGesture.hand2GestureJudgeResult == "Zero"):
+        print("YA~ should send left click signal on Right side of screen")
 
-def func2():
-    print('func2: starting')
-    for i in range(600000):
-        print("func2 progress:" + str(i))
-        pass
-    print('func2: finishing')
+    # TODO: fix no reaction to the imported variables
 
 
 if __name__ == '__main__':
     # https://stackoverflow.com/questions/7207309/how-to-run-functions-in-parallel
-    p1 = Process(target=func1)
+    p1 = Process(target=watcher)
     p1.start()
-    p2 = Process(target=func2)
+    p2 = Process(target=twoHandsGestureDetector)
     p2.start()
     p1.join()
     p2.join()
-
-"""
-print(twoHandGesture.hand1_label)
-print(twoHandGesture.hand2_label)
-
-if (twoHandGesture.hand1_label == "Left" and twoHandGesture.hand1GestureJudgeResult == "Zero") or (
-        twoHandGesture.hand2_label == "Left" and twoHandGesture.hand2GestureJudgeResult == "Zero"):
-    print("YA~ should send left click signal on Left side of screen")
-
-if (twoHandGesture.hand1_label == "Right" and twoHandGesture.hand1GestureJudgeResult == "Zero") or (
-        twoHandGesture.hand2_label == "Right" and twoHandGesture.hand2GestureJudgeResult == "Zero"):
-    print("YA~ should send left click signal on Right side of screen")
-
-# TODO: fix no reaction to the imported variables
-
-"""
