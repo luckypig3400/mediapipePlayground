@@ -3,9 +3,9 @@
 # 左右手握拳，對應遊戲上砍左邊/砍右邊 偵測到握拳自動點擊遊戲上對應的控制區一下
 import os
 
-import MyVersionHandGestureDetectorUsingAngle_support2hands as twoHandGesture
+import MyVersion_HandGestureDetectorUsingAngle_support2hands as twoHandGesture
 
-# os.system("MyVersionHandGestureDetectorUsingAngle_support2hands.py")
+# os.system("MyVersion_HandGestureDetectorUsingAngle_support2hands.py")
 
 if (twoHandGesture.hand1_label == "Left" and twoHandGesture.hand1GestureJudgeResult == "Zero") or (
         twoHandGesture.hand2_label == "Left" and twoHandGesture.hand2GestureJudgeResult == "Zero"):
