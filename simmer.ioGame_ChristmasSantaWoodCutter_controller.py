@@ -6,7 +6,7 @@ from multiprocessing import Process
 
 def twoHandsGestureDetector():
     twoHandGesture
-    pass
+    pass  # pass 是空的語句 我覺得可以作為 } 使用 ，讓自己可以更方便的讀python程式碼
 
 def watcher():
 
@@ -19,6 +19,7 @@ def watcher():
         print("YA~ should send left click signal on Right side of screen")
 
     # TODO: fix no reaction to the imported variables
+    pass
 
 
 if __name__ == '__main__':
@@ -29,3 +30,4 @@ if __name__ == '__main__':
     p2.start()
     p1.join()
     p2.join()
+    pass

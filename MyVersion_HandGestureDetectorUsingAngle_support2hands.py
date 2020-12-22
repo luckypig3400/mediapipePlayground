@@ -322,6 +322,8 @@ while cap.isOpened():
 hands.close()
 cap.release()
 
+# TODO:把手勢判別的程式碼包裝成標準Class文件以供呼叫
+
 #        8   12  16  20
 #        |   |   |   |
 #        7   11  15  19
