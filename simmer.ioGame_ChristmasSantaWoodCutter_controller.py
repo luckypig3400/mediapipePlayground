@@ -60,7 +60,9 @@ def gameController():
         lockControlForRightHand = False  # 必須先放開右手才能再次操作(稍微放開即可)
     pass
 
-    
+    if hand1GestureJudgeResult == "SpiderMan" and hand2GestureJudgeResult == "SpiderMan":
+        pyautogui.leftClick(desktop_width / 2, desktop_height * 6 / 10)
+        # 雙手同時比SpiderMan可以重新開始
 
 
 def normalized_3_pixel_coordinates(
