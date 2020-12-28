@@ -34,18 +34,33 @@ hand2_label = ""
 hand1GestureJudgeResult = ""
 hand2GestureJudgeResult = ""
 desktop_width, desktop_height = pyautogui.size()
+lockControlForLeftHand = False
+lockControlForRightHand = False
+pyautogui.PAUSE = 0
 
 
 def gameController():
-    if (hand1_label == "Left" and hand1GestureJudgeResult == "Zero") or (
-            hand2_label == "Left" and hand2GestureJudgeResult == "Zero"):
-        print("YA~ should send left click signal on Left side of screen")
+    global lockControlForLeftHand
+    global lockControlForRightHand
+    if ((hand1_label == "Left" and hand1GestureJudgeResult == "Zero") or (
+            hand2_label == "Left" and hand2GestureJudgeResult == "Zero")) and lockControlForLeftHand == False:
+        pyautogui.leftClick(desktop_width / 2 - desktop_width / 12, desktop_height * 8 / 10)
+        lockControlForLeftHand = True
+    elif (hand1_label == "Left" and (hand1GestureJudgeResult == "Five" or hand1GestureJudgeResult == "Undefined")) or (
+            hand2_label == "Left" and (hand2GestureJudgeResult == "Five" or hand2GestureJudgeResult == "Undefined")):
+        lockControlForLeftHand = False  # 必須先放開左手才能再次操作(稍微放開即可)
     pass
-    if (hand1_label == "Right" and hand1GestureJudgeResult == "Zero") or (
-            hand2_label == "Right" and hand2GestureJudgeResult == "Zero"):
-        print("YA~ should send left click signal on Right side of screen")
+
+    if ((hand1_label == "Right" and hand1GestureJudgeResult == "Zero") or (
+            hand2_label == "Right" and hand2GestureJudgeResult == "Zero")) and lockControlForRightHand == False:
+        pyautogui.leftClick(desktop_width / 2 + desktop_width / 12, desktop_height * 8 / 10)
+        lockControlForRightHand = True
+    elif (hand1_label == "Right" and (hand1GestureJudgeResult == "Five" or hand1GestureJudgeResult == "Undefined")) or (
+            hand2_label == "Right" and (hand2GestureJudgeResult == "Five" or hand2GestureJudgeResult == "Undefined")):
+        lockControlForRightHand = False  # 必須先放開右手才能再次操作(稍微放開即可)
     pass
-    # TODO: send click signal to game page
+
+    
 
 
 def normalized_3_pixel_coordinates(
@@ -337,8 +352,8 @@ while cap.isOpened():
             # TODO : simplify code if possible (make hand1 and hand2   judge func use same func with different params)
 
         gameController()  # 偵測到單隻手就會啟動遊戲控制
-        print(hand1_label + hand1GestureJudgeResult)
-        print(hand2_label + hand2GestureJudgeResult)
+        # print(hand1_label + hand1GestureJudgeResult)  # debug info
+        # print(hand2_label + hand2GestureJudgeResult)  # debug info
 
     cv2.imshow(window_name, image)
 
