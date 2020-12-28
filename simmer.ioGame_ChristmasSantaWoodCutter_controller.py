@@ -35,16 +35,15 @@ desktop_width, desktop_height = pyautogui.size()
 
 
 def watcher():
-    while 1:
-        if (hand1_label == "Left" and hand1GestureJudgeResult == "Zero") or (
-                hand2_label == "Left" and hand2GestureJudgeResult == "Zero"):
-            print("YA~ should send left click signal on Left side of screen")
-        if (hand1_label == "Right" and hand1GestureJudgeResult == "Zero") or (
-                hand2_label == "Right" and hand2GestureJudgeResult == "Zero"):
-            print("YA~ should send left click signal on Right side of screen")
-
-    # TODO: fix no reaction to the imported variables
-    pass  # pass for while
+    if (hand1_label == "Left" and hand1GestureJudgeResult == "Zero") or (
+            hand2_label == "Left" and hand2GestureJudgeResult == "Zero"):
+        print("YA~ should send left click signal on Left side of screen")
+    pass
+    if (hand1_label == "Right" and hand1GestureJudgeResult == "Zero") or (
+            hand2_label == "Right" and hand2GestureJudgeResult == "Zero"):
+        print("YA~ should send left click signal on Right side of screen")
+    pass
+    # TODO: send click signal to game page
 
 
 def normalized_3_pixel_coordinates(
@@ -327,10 +326,11 @@ while cap.isOpened():
 
             # Finished: judge hand2 finger bend status
             judgehand2FingersBendStatus()
-            # Finished: hand2 gestrue judge
+            # Finished: hand2 gesture judge
             hand2GestureJudge()
             # TODO : simplify code if possible (make hand1 and hand2   judge func use same func with different params)
-            watcher()  # 偵測到兩隻手後才會啟動遊戲控制
+
+        watcher()  # 偵測到單隻手就會啟動遊戲控制
 
     cv2.imshow(window_name, image)
 
