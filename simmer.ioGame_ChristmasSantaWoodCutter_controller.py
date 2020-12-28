@@ -33,19 +33,19 @@ hand1GestureJudgeResult = ""
 hand2GestureJudgeResult = ""
 desktop_width, desktop_height = pyautogui.size()
 
+
 def watcher():
     while 1:
-        if (twoHandGesture.hand1_label == "Left" and twoHandGesture.hand1GestureJudgeResult == "Zero") or (
-                twoHandGesture.hand2_label == "Left" and twoHandGesture.hand2GestureJudgeResult == "Zero"):
+        if (hand1_label == "Left" and hand1GestureJudgeResult == "Zero") or (
+                hand2_label == "Left" and hand2GestureJudgeResult == "Zero"):
             print("YA~ should send left click signal on Left side of screen")
-        if (twoHandGesture.hand1_label == "Right" and twoHandGesture.hand1GestureJudgeResult == "Zero") or (
-                twoHandGesture.hand2_label == "Right" and twoHandGesture.hand2GestureJudgeResult == "Zero"):
+        if (hand1_label == "Right" and hand1GestureJudgeResult == "Zero") or (
+                hand2_label == "Right" and hand2GestureJudgeResult == "Zero"):
             print("YA~ should send left click signal on Right side of screen")
 
     # TODO: fix no reaction to the imported variables
-    pass
+    pass  # pass for while
 
-    pass
 
 def normalized_3_pixel_coordinates(
         normalized_x: float, normalized_y: float, normalized_z: float, image_width: int,
@@ -272,6 +272,7 @@ def hand2GestureJudge():
                 1.5, (0, 255, 0), 2)
     # ======above is hand2 gesture judge======3
 
+
 while cap.isOpened():
     success, image = cap.read()
     if not success:
@@ -328,9 +329,8 @@ while cap.isOpened():
             judgehand2FingersBendStatus()
             # Finished: hand2 gestrue judge
             hand2GestureJudge()
-            # TODO : simplify code if possible (make hand1 and hand2 judge func use same func with different params)
-
-        watcher()
+            # TODO : simplify code if possible (make hand1 and hand2   judge func use same func with different params)
+            watcher()  # 偵測到兩隻手後才會啟動遊戲控制
 
     cv2.imshow(window_name, image)
 
@@ -339,4 +339,3 @@ while cap.isOpened():
 
 hands.close()
 cap.release()
-
