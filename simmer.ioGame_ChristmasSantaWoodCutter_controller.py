@@ -36,7 +36,7 @@ hand2GestureJudgeResult = ""
 desktop_width, desktop_height = pyautogui.size()
 
 
-def watcher():
+def gameController():
     if (hand1_label == "Left" and hand1GestureJudgeResult == "Zero") or (
             hand2_label == "Left" and hand2GestureJudgeResult == "Zero"):
         print("YA~ should send left click signal on Left side of screen")
@@ -336,7 +336,7 @@ while cap.isOpened():
             hand2GestureJudge()
             # TODO : simplify code if possible (make hand1 and hand2   judge func use same func with different params)
 
-        watcher()  # 偵測到單隻手就會啟動遊戲控制
+        gameController()  # 偵測到單隻手就會啟動遊戲控制
         print(hand1_label + hand1GestureJudgeResult)
         print(hand2_label + hand2GestureJudgeResult)
 
