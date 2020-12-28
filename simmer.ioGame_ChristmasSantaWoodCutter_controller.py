@@ -203,6 +203,8 @@ def judgehand2FingersBendStatus():
 
 
 def hand1GestureJudge():
+    global hand1GestureJudgeResult  # make the codes inside function use global variable
+    # https://stackoverflow.com/questions/423379/using-global-variables-in-a-function
     # ======below is hand1 gesture judge======
     if hand1_fingerBendStatus == [1, 1, 1, 1, 1]:
         hand1GestureJudgeResult = "Zero"
@@ -238,6 +240,8 @@ def hand1GestureJudge():
 
 
 def hand2GestureJudge():
+    global hand2GestureJudgeResult  # make the codes inside function use global variable
+    # https://stackoverflow.com/questions/423379/using-global-variables-in-a-function
     # ======below is hand2 gesture judge======
     if hand2_fingerBendStatus == [1, 1, 1, 1, 1]:
         hand2GestureJudgeResult = "Zero"
@@ -331,6 +335,8 @@ while cap.isOpened():
             # TODO : simplify code if possible (make hand1 and hand2   judge func use same func with different params)
 
         watcher()  # 偵測到單隻手就會啟動遊戲控制
+        print(hand1_label + hand1GestureJudgeResult)
+        print(hand2_label + hand2GestureJudgeResult)
 
     cv2.imshow(window_name, image)
 
