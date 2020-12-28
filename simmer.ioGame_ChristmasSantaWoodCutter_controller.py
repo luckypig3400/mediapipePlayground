@@ -36,7 +36,7 @@ hand2GestureJudgeResult = ""
 desktop_width, desktop_height = pyautogui.size()
 lockControlForLeftHand = False
 lockControlForRightHand = False
-pyautogui.PAUSE = 0.06
+pyautogui.PAUSE = 0.03  # 使每個滑鼠動作延遲60毫秒
 
 
 def gameController():
@@ -44,7 +44,8 @@ def gameController():
     global lockControlForRightHand
     if ((hand1_label == "Left" and hand1GestureJudgeResult == "Zero") or (
             hand2_label == "Left" and hand2GestureJudgeResult == "Zero")) and lockControlForLeftHand == False:
-        pyautogui.leftClick(desktop_width / 2 - desktop_width / 12, desktop_height * 8 / 10)
+        pyautogui.moveTo(desktop_width / 2 - desktop_width / 12, desktop_height * 8 / 10)
+        pyautogui.leftClick()
         lockControlForLeftHand = True
     elif (hand1_label == "Left" and (hand1GestureJudgeResult == "Five" or hand1GestureJudgeResult == "Undefined")) or (
             hand2_label == "Left" and (hand2GestureJudgeResult == "Five" or hand2GestureJudgeResult == "Undefined")):
@@ -53,7 +54,8 @@ def gameController():
 
     if ((hand1_label == "Right" and hand1GestureJudgeResult == "Zero") or (
             hand2_label == "Right" and hand2GestureJudgeResult == "Zero")) and lockControlForRightHand == False:
-        pyautogui.leftClick(desktop_width / 2 + desktop_width / 12, desktop_height * 8 / 10)
+        pyautogui.moveTo(desktop_width / 2 + desktop_width / 12, desktop_height * 8 / 10)
+        pyautogui.leftClick()
         lockControlForRightHand = True
     elif (hand1_label == "Right" and (hand1GestureJudgeResult == "Five" or hand1GestureJudgeResult == "Undefined")) or (
             hand2_label == "Right" and (hand2GestureJudgeResult == "Five" or hand2GestureJudgeResult == "Undefined")):
