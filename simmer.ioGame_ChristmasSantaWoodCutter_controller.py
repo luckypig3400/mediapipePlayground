@@ -47,8 +47,7 @@ def gameController():
         pyautogui.moveTo(desktop_width / 2 - desktop_width / 12, desktop_height * 8 / 10)
         pyautogui.leftClick()
         lockControlForLeftHand = True
-    elif (hand1_label == "Left" and (hand1GestureJudgeResult == "Five" or hand1GestureJudgeResult == "Undefined")) or (
-            hand2_label == "Left" and (hand2GestureJudgeResult == "Five" or hand2GestureJudgeResult == "Undefined")):
+    else:
         lockControlForLeftHand = False  # 必須先放開左手才能再次操作(稍微放開即可)
     pass
 
@@ -57,8 +56,7 @@ def gameController():
         pyautogui.moveTo(desktop_width / 2 + desktop_width / 12, desktop_height * 8 / 10)
         pyautogui.leftClick()
         lockControlForRightHand = True
-    elif (hand1_label == "Right" and (hand1GestureJudgeResult == "Five" or hand1GestureJudgeResult == "Undefined")) or (
-            hand2_label == "Right" and (hand2GestureJudgeResult == "Five" or hand2GestureJudgeResult == "Undefined")):
+    else:
         lockControlForRightHand = False  # 必須先放開右手才能再次操作(稍微放開即可)
     pass
 
