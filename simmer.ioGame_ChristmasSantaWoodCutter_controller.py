@@ -129,7 +129,7 @@ def judgehand1FingersBendStatus():
         hand1_pinkyAngle = 180
         print("Oops found Missing Joints in hand1 `(*>﹏<*)′")
 
-    if hand1_thumbAngle < 160:
+    if hand1_thumbAngle < 150:
         hand1_fingerBendStatus[0] = 1
         # cv2.putText(image, "thumb bent, angle:" + str(hand1_thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX,
         #             0.6, (255, 255, 255), 2)
@@ -190,7 +190,7 @@ def judgehand2FingersBendStatus():
         hand2_pinkyAngle = 180
         print("Oops found Missing Joints in hand2 `(*>﹏<*)′")
 
-    if hand2_thumbAngle < 160:
+    if hand2_thumbAngle < 150:
         hand2_fingerBendStatus[0] = 1
         # cv2.putText(image, "thumb bent, angle:" + str(hand2_thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX,
         #             0.6, (255, 255, 255), 2)
