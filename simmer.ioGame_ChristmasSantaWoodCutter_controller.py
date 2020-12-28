@@ -14,7 +14,9 @@ webcam_id = 1
 window_name = 'Hand Gesture Detector'
 
 hands = mp_hands.Hands(
-    min_detection_confidence=0.7, min_tracking_confidence=0.5)
+    max_num_hands=2, min_detection_confidence=0.7, min_tracking_confidence=0.5)
+# https://google.github.io/mediapipe/solutions/hands#max_num_hands
+# https://google.github.io/mediapipe/solutions/hands#python-solution-api
 
 cap = cv2.VideoCapture(webcam_id, cv2.CAP_DSHOW)
 
