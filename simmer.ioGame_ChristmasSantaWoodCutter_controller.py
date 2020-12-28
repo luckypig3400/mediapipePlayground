@@ -36,7 +36,7 @@ hand2GestureJudgeResult = ""
 desktop_width, desktop_height = pyautogui.size()
 lockControlForLeftHand = False
 lockControlForRightHand = False
-pyautogui.PAUSE = 0.03  # 使每個滑鼠動作延遲60毫秒
+pyautogui.PAUSE = 0.03  # 使每個滑鼠動作延遲30毫秒
 
 
 def gameController():
@@ -127,7 +127,7 @@ def judgehand1FingersBendStatus():
         hand1_pinkyAngle = 180
         print("Oops found Missing Joints in hand1 `(*>﹏<*)′")
 
-    if hand1_thumbAngle < 150:
+    if hand1_thumbAngle < 160:
         hand1_fingerBendStatus[0] = 1
         # cv2.putText(image, "thumb bent, angle:" + str(hand1_thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX,
         #             0.6, (255, 255, 255), 2)
@@ -188,7 +188,7 @@ def judgehand2FingersBendStatus():
         hand2_pinkyAngle = 180
         print("Oops found Missing Joints in hand2 `(*>﹏<*)′")
 
-    if hand2_thumbAngle < 150:
+    if hand2_thumbAngle < 160:
         hand2_fingerBendStatus[0] = 1
         # cv2.putText(image, "thumb bent, angle:" + str(hand2_thumbAngle), (30, 30), cv2.FONT_HERSHEY_COMPLEX,
         #             0.6, (255, 255, 255), 2)
